@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="large_layout_margin">24dp</dimen>
+    <dimen name="normal_layout_margin">8dp</dimen>
+    <dimen name="small_layout_margin">4dp</dimen>
+    <dimen name="small_icon_dimen">32dp</dimen>
+    <dimen name="normal_card_image_height">136dp</dimen>
+</resources>
