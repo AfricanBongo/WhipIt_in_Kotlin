@@ -6,7 +6,7 @@
     <data>
         <variable
             name="recipe"
-            type="com.africanbongo.whipitkotlin.Recipe" />
+            type="com.africanbongo.whipitkotlin.model.Recipe" />
     </data>
 
     <com.google.android.material.card.MaterialCardView
@@ -37,7 +37,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:text="@={recipe.title}"
+                    android:text="@{recipe.title}"
                     android:textStyle="bold"
                     tools:text="Pasta with Garlic, Scallions, Cauliflower &amp; Breadcrumbs"
                     android:textAppearance="?textAppearanceListItem" />
@@ -46,7 +46,7 @@
                     android:layout_marginTop="@dimen/normal_layout_margin"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:text="@={recipe.sourceName}"
+                    android:text="@{recipe.sourceName}"
                     android:textAppearance="?textAppearanceBody2"
                     tools:text="by Full Belly Sisters" />
                 <LinearLayout
@@ -65,7 +65,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="@dimen/normal_layout_margin"
                         android:layout_gravity="center"
-                        android:text="@={recipe.servings}"
+                        android:text="@{String.valueOf(recipe.servings)}"
                         android:textAppearance="?textAppearanceBody1"
                         android:layout_weight="0.5"
                         tools:text="4" />
@@ -82,7 +82,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="@dimen/small_layout_margin"
                         android:layout_gravity="center"
-                        android:text="@={recipe.readyInMinutes}"
+                        android:text="@{String.valueOf(recipe.readyInMinutes)}"
                         android:textAppearance="?textAppearanceBody1"
                         tools:text="165 min" />
                 </LinearLayout>
