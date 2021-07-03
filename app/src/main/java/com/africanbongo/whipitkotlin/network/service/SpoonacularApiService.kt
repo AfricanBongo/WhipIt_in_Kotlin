@@ -24,13 +24,6 @@ private const val BASE_URL = "https://api.spoonacular.com/"
 private const val API_KEY = "ddfab49f8dd0483ba21ccf2944815631"
 
 /**
- * The expected number of recipes to be returned from a query.
- */
-enum class QueryNumber(val value: Int) {
-    SMALL(10), MEDIUM(25), LARGE(50), CRAZY(100)
-}
-
-/**
  * Build the Moshi object that Retrofit will be using, making sure to add the Kotlin adapter for
  * full Kotlin compatibility.
  */

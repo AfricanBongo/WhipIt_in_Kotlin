@@ -46,7 +46,7 @@
                     android:layout_marginTop="@dimen/normal_layout_margin"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:text="@{recipe.sourceName}"
+                    android:text="@{String.format(@string/source_template, recipe.sourceName)}"
                     android:textAppearance="?textAppearanceBody2"
                     tools:text="by Full Belly Sisters" />
                 <LinearLayout

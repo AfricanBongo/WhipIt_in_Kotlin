@@ -6,4 +6,6 @@
     <dimen name="small_icon_dimen">32dp</dimen>
     <dimen name="status_image_size">80dp</dimen>
     <dimen name="normal_card_image_height">136dp</dimen>
+    <dimen name="large_margin">16dp</dimen>
+    <dimen name="normal_padding">8dp</dimen>
 </resources>

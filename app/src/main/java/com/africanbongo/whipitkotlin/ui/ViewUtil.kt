@@ -28,19 +28,26 @@ fun ImageView.fetchImage(imgUrl: String) {
 
 /**
  * Call to update the loading status using the ImageView.
+ * Will set [recyclerView] to be blank when [status] is [RequestStatus.LOADING] or [RequestStatus.ERROR].
  * @param status [RequestStatus] holding state of the request.
+ * @param recyclerView [RecyclerView] to manipulate at different requests
  */
-fun ImageView.bindStatus(status: RequestStatus) {
+fun ImageView.bindStatusWithRecyclerView(status: RequestStatus, recyclerView: RecyclerView) {
     when (status) {
         RequestStatus.LOADING -> {
+            recyclerView.visibility = View.GONE
             visibility = View.VISIBLE
             setImageResource(R.drawable.ic_loading_pizza)
         }
         RequestStatus.ERROR -> {
+            recyclerView.visibility = View.GONE
             visibility = View.VISIBLE
             setImageResource(R.drawable.ic_error)
         }
-        RequestStatus.DONE -> visibility = View.GONE
+        RequestStatus.DONE -> {
+            recyclerView.visibility = View.VISIBLE
+            visibility = View.GONE
+        }
     }
 }
 

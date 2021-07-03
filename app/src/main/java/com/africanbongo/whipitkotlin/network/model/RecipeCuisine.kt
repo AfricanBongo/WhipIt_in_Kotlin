@@ -5,6 +5,7 @@ package com.africanbongo.whipitkotlin.network.model
  * e.g. A Texas BBQ Medley is considered to be part of American cuisine.
  */
 enum class RecipeCuisine(val type: String) {
+    ALL("all"),
     AMERICAN("american"),
     BRITISH("british"),
     CHINESE("chinese"),
@@ -13,3 +14,8 @@ enum class RecipeCuisine(val type: String) {
     ITALIAN("italian"),
     INDIAN("indian")
 }
+
+fun List<RecipeCuisine>.asStrings(): List<String> =
+    map { cuisine ->
+        cuisine.type.replaceFirstChar { it.titlecase() }
+    }
