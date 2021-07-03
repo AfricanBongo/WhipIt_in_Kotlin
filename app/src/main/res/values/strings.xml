@@ -3,4 +3,7 @@
     <string name="toolbar_title">WhipIt</string>
     <string name="servings_tooltip">Servings</string>
     <string name="preparation_tooltip">Preparation time</string>
+    <string name="source_template">By %s</string>
+    <string name="cuisine_title">Cuisine :</string>
+    <string name="number_title">Number :</string>
 </resources>
