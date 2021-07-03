@@ -1,4 +1,4 @@
-package com.africanbongo.whipitkotlin.model
+package com.africanbongo.whipitkotlin.network.model
 
 /**
  * An enum class illustrating the cuisine that a recipe would belong to,

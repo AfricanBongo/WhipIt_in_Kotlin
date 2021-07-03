@@ -6,10 +6,13 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.africanbongo.whipitkotlin.databinding.RecipeListItemBinding
-import com.africanbongo.whipitkotlin.model.Recipe
+import com.africanbongo.whipitkotlin.network.model.Recipe
 import com.africanbongo.whipitkotlin.ui.fetchImage
 
-// TODO Document this class, inner classes and all methods.
+/**
+ * Recyclerview adapter that displays a list of [Recipe]s.
+ * Use the [submitList] method to update the list shown.
+ */
 class RecipeListAdapter :
     ListAdapter<Recipe, RecipeListAdapter.RecipeViewHolder>(DiffCallback) {
     class RecipeViewHolder(private var binding: RecipeListItemBinding): RecyclerView.ViewHolder(binding.root) {

@@ -1,7 +1,8 @@
-package com.africanbongo.whipitkotlin.network
+package com.africanbongo.whipitkotlin.network.service
 
-import com.africanbongo.whipitkotlin.model.Recipe
-import com.africanbongo.whipitkotlin.model.RecipeCuisine
+import com.africanbongo.whipitkotlin.network.model.Recipe
+import com.africanbongo.whipitkotlin.network.model.RecipeCuisine
+import com.africanbongo.whipitkotlin.network.model.RecipeList
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import okhttp3.OkHttpClient
@@ -11,7 +12,6 @@ import retrofit2.converter.moshi.MoshiConverterFactory
 import retrofit2.http.GET
 import retrofit2.http.Query
 import timber.log.Timber
-import java.util.logging.Logger
 
 /**
  * URL for fetching data from the [Spoonacular API](https://spoonacular.com/food-api).
@@ -38,14 +38,20 @@ private val moshi = Moshi.Builder()
     .add(KotlinJsonAdapterFactory())
     .build()
 
-val interceptor = HttpLoggingInterceptor {
+
+/*
+Interceptor to log the network requests in order to allow better debugging.
+ */
+private val interceptor = HttpLoggingInterceptor {
     Timber.tag("OkHttp").i(it)
 }.apply {
     level = HttpLoggingInterceptor.Level.BODY
 }
-
-// TODO Doc
 private val client = OkHttpClient.Builder().addInterceptor(interceptor).build()
+
+/**
+ * Client to access data from the API.
+ */
 private val retrofit = Retrofit.Builder()
     .client(client)
     .addConverterFactory(MoshiConverterFactory.create(moshi))
@@ -63,8 +69,6 @@ object SpoonacularApi {
     val retrofitService: SpoonacularApiService by lazy { retrofit.create(SpoonacularApiService::class.java)}
 }
 
-
-// TODO Check request error again
 /**
  * Retrofit API Service that fetches data from the [Spoonacular API](https://spoonacular.com/food-api) database.
  */

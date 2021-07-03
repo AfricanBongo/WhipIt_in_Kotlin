@@ -46,7 +46,7 @@ dependencies {
     def coil_version = "1.2.2"
     def retrofit_version = "2.9.0"
     def moshi_version = "1.12.0"
-
+    
     // Coil image-loading library
     implementation "io.coil-kt:coil:$coil_version"
 

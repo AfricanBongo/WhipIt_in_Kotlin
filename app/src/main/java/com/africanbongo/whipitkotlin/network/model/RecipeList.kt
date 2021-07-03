@@ -1,6 +1,6 @@
-package com.africanbongo.whipitkotlin.network
+package com.africanbongo.whipitkotlin.network.model
 
-import com.africanbongo.whipitkotlin.model.Recipe
+import com.africanbongo.whipitkotlin.network.model.Recipe
 import com.squareup.moshi.Json
 
 /**

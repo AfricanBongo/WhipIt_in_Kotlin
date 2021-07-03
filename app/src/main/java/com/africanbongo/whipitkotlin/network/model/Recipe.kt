@@ -1,4 +1,4 @@
-package com.africanbongo.whipitkotlin.model
+package com.africanbongo.whipitkotlin.network.model
 
 import android.os.Parcelable
 import com.squareup.moshi.Json

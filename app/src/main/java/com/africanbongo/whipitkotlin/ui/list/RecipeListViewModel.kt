@@ -1,12 +1,11 @@
 package com.africanbongo.whipitkotlin.ui.list
 
-import android.app.Application
 import androidx.lifecycle.*
-import com.africanbongo.whipitkotlin.model.Recipe
-import com.africanbongo.whipitkotlin.model.RecipeCuisine
-import com.africanbongo.whipitkotlin.network.QueryNumber
-import com.africanbongo.whipitkotlin.network.RequestStatus
-import com.africanbongo.whipitkotlin.network.SpoonacularApi
+import com.africanbongo.whipitkotlin.network.model.Recipe
+import com.africanbongo.whipitkotlin.network.model.RecipeCuisine
+import com.africanbongo.whipitkotlin.network.service.QueryNumber
+import com.africanbongo.whipitkotlin.network.service.RequestStatus
+import com.africanbongo.whipitkotlin.network.service.SpoonacularApi
 import kotlinx.coroutines.launch
 import timber.log.Timber
 
@@ -25,7 +24,13 @@ class RecipeListViewModel : ViewModel() {
      */
     val listOfRecipes: LiveData<List<Recipe>> = _listOfRecipes
 
-    // TODO Document this
+    /**
+     * Fetches the list of [Recipes] from the API and updates [listOfRecipes]'s value.
+     * @param cuisine The cuisine that the list of recipes should belong to,
+     * set to null if recipes from random and different cuisines are acceptable.
+     * It is set to null by default though.
+     * @param numberOfRecipes Uses enum [QueryNumber] to determine that the number of recipes that should be returned.
+     */
     fun fetchRecipes(cuisine: RecipeCuisine? = null, numberOfRecipes: QueryNumber = QueryNumber.MEDIUM) {
         viewModelScope.launch {
             _status.value = RequestStatus.LOADING

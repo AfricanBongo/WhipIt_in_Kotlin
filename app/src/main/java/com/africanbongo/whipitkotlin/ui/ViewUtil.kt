@@ -6,8 +6,8 @@ import androidx.core.net.toUri
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import com.africanbongo.whipitkotlin.R
-import com.africanbongo.whipitkotlin.model.Recipe
-import com.africanbongo.whipitkotlin.network.RequestStatus
+import com.africanbongo.whipitkotlin.network.model.Recipe
+import com.africanbongo.whipitkotlin.network.service.RequestStatus
 import com.africanbongo.whipitkotlin.ui.list.RecipeListAdapter
 
 /**
@@ -26,7 +26,10 @@ fun ImageView.fetchImage(imgUrl: String) {
     }
 }
 
-// TODO Document this.
+/**
+ * Call to update the loading status using the ImageView.
+ * @param status [RequestStatus] holding state of the request.
+ */
 fun ImageView.bindStatus(status: RequestStatus) {
     when (status) {
         RequestStatus.LOADING -> {
@@ -40,7 +43,12 @@ fun ImageView.bindStatus(status: RequestStatus) {
         RequestStatus.DONE -> visibility = View.GONE
     }
 }
-// TODO Document this.
+
+/**
+ * Binds a list of [Recipe] with a recyclerview.
+ * Creates a new adapter if one hadn't been set already.
+ * @param listOfItems List of [Recipe] to be displayed.
+ */
 fun RecyclerView.bindWithData(listOfItems: List<Recipe>) {
     if (adapter == null) adapter = RecipeListAdapter()
     (adapter as RecipeListAdapter).submitList(listOfItems)
