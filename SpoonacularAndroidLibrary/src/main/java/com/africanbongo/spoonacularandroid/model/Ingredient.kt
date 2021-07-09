@@ -7,21 +7,17 @@ import com.squareup.moshi.JsonClass
  */
 @JsonClass(generateAdapter = true)
 data class Ingredient (
+    val id: Int,
+    val amount: Float,
+    val unit: String?,
+    val image: String?,
+    val name: String,
+    val nameClean: String,
+    val original: String,
+    val originalString: String,
     /**
      * The description of the ingredient without any amount or unit attached to it.
      * E.g. "clove(s) of garlic"
      */
-    val originalName: String,
-
-    /**
-     * The amount of the ingredient to be used.
-     * E.g. "2"
-     */
-    val amount: Float?,
-
-    /**
-     * The unit of measurement for the ingredient.
-     * E.g. "g" for "grams"
-     */
-    val unit: String?
+    val originalName: String
 )

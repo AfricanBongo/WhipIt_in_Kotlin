@@ -1,4 +1,4 @@
-package com.africanbongo.whipitkotlin.network.service
+package com.africanbongo.spoonacularandroid.service
 
 /**
  * The expected number of recipes to be returned from a query.

@@ -4,11 +4,13 @@ import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
 
 /**
- *
+ * Network model object that represents the recipe stored within the Spoonacular API.
  * Use the [getInstructions] method when you want to access the [Steps] object, not the [steps] list.
  *
  * The [instructions] list is used to contain just the one object because the "analyzedInstructions" name
  * contains a Json array value with just one Json object, i.e. the [Steps] object.
+ *
+ * @author [Donell Mtabvuri (AfricanBongo)](https://github.com/AfricanBongo)
  */
 @JsonClass(generateAdapter = true)
 data class Recipe (

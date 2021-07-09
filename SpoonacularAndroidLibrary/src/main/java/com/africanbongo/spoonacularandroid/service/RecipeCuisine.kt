@@ -1,4 +1,4 @@
-package com.africanbongo.spoonacularandroid.model
+package com.africanbongo.spoonacularandroid.service
 
 /**
  * An enum class illustrating the cuisine that a recipe would belong to,
@@ -12,10 +12,8 @@ enum class RecipeCuisine(val type: String) {
     FRENCH("french"),
     MEXICAN("mexican"),
     ITALIAN("italian"),
-    INDIAN("indian")
+    INDIAN("indian"),
+    GREEK("greek"),
+    KOREAN("korean"),
+    MEDITERRANEAN("mediterranean")
 }
-
-fun List<RecipeCuisine>.asStrings(): List<String> =
-    map { cuisine ->
-        cuisine.type.replaceFirstChar { it.titlecase() }
-    }
