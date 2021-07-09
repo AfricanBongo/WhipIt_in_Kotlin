@@ -1,4 +1,4 @@
-package com.africanbongo.whipitkotlin.network.model
+package com.africanbongo.spoonacularandroid.model
 
 /**
  * An enum class illustrating the cuisine that a recipe would belong to,

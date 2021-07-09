@@ -1,8 +1,8 @@
 package com.africanbongo.whipitkotlin.network.service
 
-import com.africanbongo.whipitkotlin.network.model.Recipe
-import com.africanbongo.whipitkotlin.network.model.RecipeCuisine
-import com.africanbongo.whipitkotlin.network.model.RecipeList
+import com.africanbongo.spoonacularandroid.model.RecipeList
+import com.africanbongo.spoonacularandroid.model.Recipe
+import com.africanbongo.spoonacularandroid.model.RecipeCuisine
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import okhttp3.OkHttpClient

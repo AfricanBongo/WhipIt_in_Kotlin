@@ -1,9 +1,12 @@
 package com.africanbongo.whipitkotlin.ui.list
 
-import androidx.lifecycle.*
-import com.africanbongo.whipitkotlin.network.model.Recipe
-import com.africanbongo.whipitkotlin.network.model.RecipeCuisine
-import com.africanbongo.whipitkotlin.network.model.asStrings
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import com.africanbongo.spoonacularandroid.model.Recipe
+import com.africanbongo.spoonacularandroid.model.RecipeCuisine
+import com.africanbongo.spoonacularandroid.model.asStrings
 import com.africanbongo.whipitkotlin.network.service.QueryNumber
 import com.africanbongo.whipitkotlin.network.service.RequestStatus
 import com.africanbongo.whipitkotlin.network.service.SpoonacularApi
