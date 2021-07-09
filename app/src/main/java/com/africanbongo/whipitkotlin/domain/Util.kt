@@ -1,4 +1,4 @@
-package com.africanbongo.whipitkotlin.model
+package com.africanbongo.whipitkotlin.domain
 
 import com.africanbongo.spoonacularandroid.model.Ingredient
 import com.africanbongo.spoonacularandroid.model.Recipe
@@ -57,3 +57,5 @@ fun DomainRecipe.toSummarisedRecipe(): SummarisedRecipe =
         servings = servings,
         readyInMinutes = readyInMinutes
     )
+
+// TODO Write extension functions to change database models into domain models.

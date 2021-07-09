@@ -1,4 +1,4 @@
-package com.africanbongo.whipitkotlin.model
+package com.africanbongo.whipitkotlin.domain
 
 import com.africanbongo.spoonacularandroid.model.Ingredient
 

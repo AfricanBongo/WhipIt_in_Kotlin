@@ -56,7 +56,7 @@ class RecipeListFragment: Fragment() {
             }
 
             override fun onNothingSelected(parent: AdapterView<*>?) {
-                TODO("Not yet implemented")
+
             }
         }
 
@@ -72,7 +72,7 @@ class RecipeListFragment: Fragment() {
             }
 
             override fun onNothingSelected(parent: AdapterView<*>?) {
-                TODO("Not yet implemented")
+
             }
         }
     }

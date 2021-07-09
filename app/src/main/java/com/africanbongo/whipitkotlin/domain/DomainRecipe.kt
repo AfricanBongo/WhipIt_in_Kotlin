@@ -1,4 +1,4 @@
-package com.africanbongo.whipitkotlin.model
+package com.africanbongo.whipitkotlin.domain
 
 data class DomainRecipe (
     val id: Int,
