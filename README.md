@@ -1,4 +1,5 @@
 # WhipIt in Kotlin
+
 A mini-project to show simple remastering of the explore screen of the WhipIt Android Java App.
 I first did the high-fidelity design in XD, and the final app will embody the design below.
 
