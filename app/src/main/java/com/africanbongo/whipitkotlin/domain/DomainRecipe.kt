@@ -9,6 +9,7 @@ data class DomainRecipe (
     val spoonacularScore: Float,
     val servings: Int,
     val readyInMinutes: Int,
+    val cuisine: String,
     val ingredients: List<DomainIngredient>?,
     val steps: List<DomainInstruction>?
 )

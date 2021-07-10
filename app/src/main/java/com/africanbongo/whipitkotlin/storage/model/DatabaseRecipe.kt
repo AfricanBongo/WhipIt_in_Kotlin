@@ -12,6 +12,7 @@ data class DatabaseRecipe (
    val title: String,
    val imageUrl: String?,
    val sourceName: String,
+   val sourceUrl: String,
    val spoonacularScore: Float,
    val servings: Int,
    val readyInMinutes: Int,

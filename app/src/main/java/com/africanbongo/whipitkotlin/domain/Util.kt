@@ -3,6 +3,10 @@ package com.africanbongo.whipitkotlin.domain
 import com.africanbongo.spoonacularandroid.model.Ingredient
 import com.africanbongo.spoonacularandroid.model.Recipe
 import com.africanbongo.spoonacularandroid.model.Steps
+import com.africanbongo.whipitkotlin.storage.model.DatabaseCuisine
+import com.africanbongo.whipitkotlin.storage.model.DatabaseIngredient
+import com.africanbongo.whipitkotlin.storage.model.DatabaseInstruction
+import com.africanbongo.whipitkotlin.storage.model.DatabaseRecipe
 
 /**
  * Convert a network model of [Ingredient] into the domain equivalent.
@@ -40,6 +44,7 @@ fun Recipe.toDomainModel(): DomainRecipe =
         servings = servings,
         readyInMinutes = readyInMinutes,
         ingredients = ingredients?.map { it.toDomainModel() },
+        // TODO Fix cuisine problem here.
         steps = getInstructions()?.toDomainModel()
     )
 
@@ -58,4 +63,52 @@ fun DomainRecipe.toSummarisedRecipe(): SummarisedRecipe =
         readyInMinutes = readyInMinutes
     )
 
-// TODO Write extension functions to change database models into domain models.
+/**
+ * Map a list of [DatabaseIngredient]s into a list of [DomainIngredient]s.
+ * @return A mapped list of [DomainIngredient].
+ */
+private fun List<DatabaseIngredient>.toDomainModels(): List<DomainIngredient> = map { databaseIngredient ->
+        DomainIngredient(
+            description = databaseIngredient.description,
+            amount = databaseIngredient.amount,
+            unit = databaseIngredient.unit
+        )
+    }
+
+/**
+ * Map a list of [DatabaseInstruction]s into a list of [DomainInstruction]s.
+ * @return A mapped list of [DomainInstruction]s.
+ */
+@JvmName("toDomainModelsDatabaseInstruction")
+private fun List<DatabaseInstruction>.toDomainModels(): List<DomainInstruction> = map { databaseInstruction ->
+    DomainInstruction(
+        number = databaseInstruction.number,
+        step = databaseInstruction.step
+    )
+}.sortedBy { it.number }
+
+/**
+ * Map a [DatabaseRecipe] object into a [DomainRecipe] object
+ * Combine with [DatabaseIngredient]s and [DatabaseInstruction]s into one object.
+ * @param ingredients List of ingredients fetched from the database.
+ * @param instructions List of instructions fetched from the database.
+ * @return A mapped [DomainRecipe].
+ */
+fun DatabaseRecipe.toDomainModel(
+    cuisine: DatabaseCuisine,
+    ingredients: List<DatabaseIngredient>,
+    instructions: List<DatabaseInstruction>): DomainRecipe =
+    DomainRecipe(
+        id = recipeId,
+        title = title,
+        imageUrl = imageUrl,
+        sourceName = sourceName,
+        sourceUrl = sourceUrl,
+        spoonacularScore = spoonacularScore,
+        servings = servings,
+        readyInMinutes = readyInMinutes,
+        cuisine = cuisine.type,
+        ingredients = ingredients.toDomainModels(),
+        steps = instructions.toDomainModels(),
+    )
+

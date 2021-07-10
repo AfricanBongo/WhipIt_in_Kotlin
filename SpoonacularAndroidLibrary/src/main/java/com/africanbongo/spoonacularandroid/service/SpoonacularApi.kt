@@ -59,7 +59,7 @@ interface SpoonacularApiService {
      * Asynchronous call to fetch a list of random recipes from the API.
      * @param cuisine The type of cuisine that the recipes should belong to,
      * this is by default set to not return recipes of any specific cuisine.
-     * Make sure to pass value of a [RecipeCuisine] enum as a cuisine type if need arises.
+     * Make sure to pass value of a [Cuisine] enum as a cuisine type if need arises.
      * @param numberOfRecipes The number of recipes to be returned in the request.
      * It's most preferable to use enum [QueryNumber]s values in this place
      * Set to [QueryNumber.MEDIUM]'s value by default.

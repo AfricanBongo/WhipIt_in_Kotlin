@@ -4,8 +4,7 @@ import androidx.room.Embedded
 import androidx.room.Entity
 import androidx.room.Junction
 import androidx.room.Relation
-import com.africanbongo.spoonacularandroid.model.Ingredient
-import com.africanbongo.spoonacularandroid.model.Recipe
+import com.africanbongo.spoonacularandroid.model.*
 
 /**
  * Class used to cross-reference the [DatabaseRecipe] and [DatabaseIngredient] relations in the database.
@@ -17,14 +16,38 @@ class RecipeIngredientCrossRef (
 )
 
 /**
- * Container class that holds a [Recipe] and a list of [Ingredient]s, fetched from the database.
+ * Class used to cross-reference the [DatabaseRecipe] and [DatabaseCuisine] relations in the database.
+ */
+@Entity(primaryKeys = ["recipeId", "cuisineId"])
+class RecipeCuisineCrossRef (
+    val recipeId: Int,
+    val cuisineId: Int,
+)
+
+/**
+ * Container class that holds a [DatabaseRecipe] and a list of [DatabaseIngredient]s, fetched from the database.
  */
 data class RecipeWithIngredients (
-    @Embedded val recipe: Recipe,
+    @Embedded val recipe: DatabaseRecipe,
     @Relation(
         parentColumn = "recipeId",
         entityColumn = "ingredientId",
         associateBy = Junction(RecipeIngredientCrossRef::class)
     )
-    val ingredients: List<Ingredient>
+    val ingredients: List<DatabaseIngredient>
+)
+
+/**
+ * Container class that holds a [Cuisine] and a list of [DatabaseRecipe] IDs, fetched from the database.
+ */
+data class CuisineWithRecipeIds (
+    @Embedded val cuisine: DatabaseCuisine,
+    @Relation(
+        entity= DatabaseRecipe::class,
+        parentColumn = "cuisineId",
+        entityColumn = "recipeId",
+        associateBy = Junction(RecipeCuisineCrossRef::class),
+        projection = ["recipeId"]
+    )
+    val recipes: List<Int>
 )

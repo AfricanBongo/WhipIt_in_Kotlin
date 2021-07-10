@@ -6,7 +6,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.africanbongo.spoonacularandroid.model.Recipe
 import com.africanbongo.spoonacularandroid.service.QueryNumber
-import com.africanbongo.spoonacularandroid.service.RecipeCuisine
+import com.africanbongo.spoonacularandroid.model.Cuisine
 import com.africanbongo.spoonacularandroid.service.SpoonacularApi
 import com.africanbongo.whipitkotlin.ui.RequestStatus
 import kotlinx.coroutines.launch
@@ -15,12 +15,12 @@ import timber.log.Timber
 class RecipeListViewModel : ViewModel() {
 
     private val _queryNumberList = QueryNumber.values().asList()
-    private val _cuisineTypes = RecipeCuisine.values().asList()
+    private val _cuisineTypes = Cuisine.values().asList()
     private var _status = MutableLiveData<RequestStatus>()
     private var _listOfRecipes = MutableLiveData<List<Recipe>>()
 
     private var currentNumber: QueryNumber = QueryNumber.MEDIUM
-    private var currentCuisine: RecipeCuisine = RecipeCuisine.ALL
+    private var currentCuisine: Cuisine = Cuisine.ALL
 
 
     init {
@@ -33,7 +33,7 @@ class RecipeListViewModel : ViewModel() {
     val status: LiveData<RequestStatus> = _status
 
     /**
-     * A list of the [RecipeCuisine] enums.
+     * A list of the [Cuisine] enums.
      */
     val cuisineTypes = _cuisineTypes.asStrings()
 
@@ -57,7 +57,7 @@ class RecipeListViewModel : ViewModel() {
             // Try to load list of recipes, and update request status accordingly.
             try {
                 _listOfRecipes.value = SpoonacularApi.retrofitService.getRandomRecipesOfType(
-                    cuisine = if (currentCuisine == RecipeCuisine.ALL) null else currentCuisine.type,
+                    cuisine = if (currentCuisine == Cuisine.ALL) null else currentCuisine.type,
                     numberOfRecipes = currentNumber.value
                 ).listOfRecipes
                 _status.value = RequestStatus.DONE
@@ -79,7 +79,7 @@ class RecipeListViewModel : ViewModel() {
     }
 
     /**
-     * Change the [RecipeCuisine] that should be used in fetching the list of recipes
+     * Change the [Cuisine] that should be used in fetching the list of recipes
      * @param listPosition The position of the number in the [cuisineTypes].
      */
     fun changeCuisine(listPosition: Int) {
@@ -87,7 +87,7 @@ class RecipeListViewModel : ViewModel() {
         fetchRecipes()
     }
 
-    private fun List<RecipeCuisine>.asStrings(): List<String> =
+    private fun List<Cuisine>.asStrings(): List<String> =
         map { cuisine ->
             cuisine.type.replaceFirstChar { it.titlecase() }
         }
