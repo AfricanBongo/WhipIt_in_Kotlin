@@ -1,9 +1,6 @@
 package com.africanbongo.whipitkotlin.storage.database
 
-import androidx.room.Dao
-import androidx.room.Insert
-import androidx.room.OnConflictStrategy
-import androidx.room.Query
+import androidx.room.*
 import com.africanbongo.spoonacularandroid.model.Ingredient
 import com.africanbongo.whipitkotlin.storage.database.model.*
 
@@ -49,7 +46,23 @@ interface RecipeDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertCuisines(cuisines: List<DatabaseCuisine>?)
 
-    // TODO Finish these methods.
-//    @Query("SELECT * FROM recipe_table WHERE ")
-//    suspend fun getCuisineWithRecipes()
+    /**
+     * Fetch a cuisine with its associated recipes.
+     * @param cuisineId The id used to locate the cuisine to return.
+     * @return A cuisine with its associated list of recipe IDs.
+     */
+    @Transaction
+    @Query("SELECT * FROM cuisine_table WHERE cuisineId = :cuisineId")
+    suspend fun getCuisineWithRecipes(cuisineId: Int): CuisineWithRecipeIds
+
+    /**
+     * Fetch a recipe with its associated ingredients.
+     * @param recipeId The id used to locate the recipe to return.
+     * @return A recipe with its associated list of recipe IDs.
+     */
+    @Transaction
+    @Query("SELECT * FROM recipe_table WHERE recipeId = :recipeId")
+    suspend fun getRecipeWithIngredients(recipeId: Int): RecipeWithIngredients
+
+    // TODO Write other methods.
 }

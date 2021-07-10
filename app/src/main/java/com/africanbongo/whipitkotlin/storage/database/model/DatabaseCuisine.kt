@@ -7,7 +7,7 @@ import com.africanbongo.spoonacularandroid.model.CuisineEnum
 /**
  * Database model of the network model [CuisineEnum].
  */
-@Entity
+@Entity(tableName = "cuisine_table")
 data class DatabaseCuisine (
     @PrimaryKey(autoGenerate = false) val cuisineId: Int,
     val type: String
