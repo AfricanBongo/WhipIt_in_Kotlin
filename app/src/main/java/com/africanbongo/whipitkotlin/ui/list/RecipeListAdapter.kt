@@ -5,8 +5,8 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.africanbongo.spoonacularandroid.model.Recipe
 import com.africanbongo.whipitkotlin.databinding.RecipeListItemBinding
-import com.africanbongo.whipitkotlin.network.model.Recipe
 import com.africanbongo.whipitkotlin.ui.fetchImage
 
 /**
@@ -18,7 +18,7 @@ class RecipeListAdapter :
     class RecipeViewHolder(private var binding: RecipeListItemBinding): RecyclerView.ViewHolder(binding.root) {
         fun bind(recipe: Recipe) {
             binding.recipe = recipe
-            recipe.imgSrcUrl?.let { binding.recipeImageView.fetchImage(it) }
+            recipe.image?.let { binding.recipeImageView.fetchImage(it) }
             binding.executePendingBindings()
         }
     }

@@ -5,9 +5,8 @@ import android.widget.ImageView
 import androidx.core.net.toUri
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
+import com.africanbongo.spoonacularandroid.model.Recipe
 import com.africanbongo.whipitkotlin.R
-import com.africanbongo.whipitkotlin.network.model.Recipe
-import com.africanbongo.whipitkotlin.network.service.RequestStatus
 import com.africanbongo.whipitkotlin.ui.list.RecipeListAdapter
 
 /**
