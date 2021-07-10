@@ -4,7 +4,7 @@ package com.africanbongo.spoonacularandroid.model
  * An enum class illustrating the cuisine that a recipe would belong to,
  * e.g. A Texas BBQ Medley is considered to be part of American cuisine.
  */
-enum class Cuisine(val id: Int, val type: String) {
+enum class CuisineEnum(val id: Int, val type: String) {
     NONE(1, "none"),
     AFRICAN(2,"african"),
     AMERICAN(3, "american"),

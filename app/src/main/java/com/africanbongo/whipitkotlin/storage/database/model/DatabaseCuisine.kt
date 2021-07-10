@@ -1,11 +1,11 @@
-package com.africanbongo.whipitkotlin.storage.model
+package com.africanbongo.whipitkotlin.storage.database.model
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import com.africanbongo.spoonacularandroid.model.Cuisine
+import com.africanbongo.spoonacularandroid.model.CuisineEnum
 
 /**
- * Database model of the network model [Cuisine].
+ * Database model of the network model [CuisineEnum].
  */
 @Entity
 data class DatabaseCuisine (

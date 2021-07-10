@@ -2,6 +2,7 @@ package com.africanbongo.spoonacularandroid.model
 
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
+import com.africanbongo.spoonacularandroid.model.toCuisineEnums
 
 /**
  * Network model object that represents the recipe stored within the Spoonacular API.
@@ -42,12 +43,18 @@ data class Recipe (
     /**
      * The ingredients of the recipe in more detail.
      */
-    @Json(name = "extendedIngredients") val ingredients: List<Ingredient>?,
+    @Json(name = "extendedIngredients") val ingredients: List<Ingredient>,
 
     /**
      * The analyzed instructions containing in-depth information about the steps to take in making the recipe
      */
-    @Json(name = "analyzedInstructions") val instructions: List<Steps>?
+    @Json(name = "analyzedInstructions") val instructions: List<Steps>?,
+
+    /**
+     * The list of cuisines the recipe belongs to.
+     * Use the [toCuisineEnums] method on the list to map them into [CuisineEnum]s.
+     */
+    val cuisine: List<String>?
 ) {
     /**
      * Get the [Steps] object with the list of steps used in the recipe.

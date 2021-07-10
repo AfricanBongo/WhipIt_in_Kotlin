@@ -1,4 +1,4 @@
-package com.africanbongo.whipitkotlin.storage.model
+package com.africanbongo.whipitkotlin.storage.database.model
 
 import androidx.room.Embedded
 import androidx.room.Entity
@@ -38,7 +38,7 @@ data class RecipeWithIngredients (
 )
 
 /**
- * Container class that holds a [Cuisine] and a list of [DatabaseRecipe] IDs, fetched from the database.
+ * Container class that holds a [CuisineEnum] and a list of [DatabaseRecipe] IDs, fetched from the database.
  */
 data class CuisineWithRecipeIds (
     @Embedded val cuisine: DatabaseCuisine,

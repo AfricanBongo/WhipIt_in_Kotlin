@@ -1,4 +1,4 @@
-package com.africanbongo.whipitkotlin.storage.model
+package com.africanbongo.whipitkotlin.storage.database.model
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
