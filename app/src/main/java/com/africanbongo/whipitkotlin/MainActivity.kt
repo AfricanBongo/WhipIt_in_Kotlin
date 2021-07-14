@@ -1,6 +1,7 @@
 package com.africanbongo.whipitkotlin
 
 import android.os.Bundle
+import android.transition.Slide
 import androidx.appcompat.app.AppCompatActivity
 
 class MainActivity : AppCompatActivity() {

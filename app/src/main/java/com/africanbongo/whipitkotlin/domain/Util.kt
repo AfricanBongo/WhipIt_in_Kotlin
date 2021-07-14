@@ -94,7 +94,7 @@ private fun List<DatabaseInstruction>.toDomainModels(): List<DomainInstruction> 
 fun DatabaseRecipe.toDomainModel(
     cuisine: DatabaseCuisine,
     ingredients: List<DatabaseIngredient>,
-    instructions: List<DatabaseInstruction>): DomainRecipe =
+    instructions: List<DatabaseInstruction>?): DomainRecipe =
     DomainRecipe(
         id = recipeId,
         title = title,
@@ -106,6 +106,6 @@ fun DatabaseRecipe.toDomainModel(
         readyInMinutes = readyInMinutes,
         cuisine = cuisine.type,
         ingredients = ingredients.toDomainModels(),
-        steps = instructions.toDomainModels(),
+        steps = instructions?.toDomainModels(),
     )
 

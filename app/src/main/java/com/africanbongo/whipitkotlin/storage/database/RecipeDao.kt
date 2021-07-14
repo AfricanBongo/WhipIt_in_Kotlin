@@ -1,7 +1,7 @@
 package com.africanbongo.whipitkotlin.storage.database
 
 import androidx.room.*
-import com.africanbongo.spoonacularandroid.model.Ingredient
+import zw.co.bitpirates.spoonacularclient.model.Ingredient
 import com.africanbongo.whipitkotlin.storage.database.model.*
 
 /**
@@ -28,7 +28,7 @@ interface RecipeDao {
      * @param ingredients The list of ingredients to insert into the database.
      */
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertIngredients(ingredients: List<Ingredient>)
+    suspend fun insertIngredients(ingredients: List<DatabaseIngredient>)
 
     /**
      * Insert a list of instructions into the database.
@@ -36,7 +36,7 @@ interface RecipeDao {
      * @param instructions The list of ingredients to insert into the database.
      */
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertInstructions(instructions: List<DatabaseInstruction>?)
+    suspend fun insertInstructions(instructions: List<DatabaseInstruction>)
 
     /**
      * Insert a list of cuisines into the database.
@@ -44,7 +44,21 @@ interface RecipeDao {
      * @param cuisines The list of ingredients to insert into the database.
      */
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertCuisines(cuisines: List<DatabaseCuisine>?)
+    suspend fun insertCuisines(cuisines: List<DatabaseCuisine>)
+
+    /**
+     * Insert a list of recipe id's paired with ingredient ids into the database.
+     * @param list List of [RecipeCuisineCrossRef].
+     */
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insertRecipeIngredientCrossRefs(list: List<RecipeIngredientCrossRef>)
+
+    /**
+     * Insert a list of recipe id's paired with cuisine id's into the database.
+     * @param list List of [RecipeCuisineCrossRef].
+     */
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
+    suspend fun insertRecipeCuisineCrossRef(list: List<RecipeCuisineCrossRef>)
 
     /**
      * Fetch a cuisine with its associated recipes.
@@ -64,5 +78,7 @@ interface RecipeDao {
     @Query("SELECT * FROM recipe_table WHERE recipeId = :recipeId")
     suspend fun getRecipeWithIngredients(recipeId: Int): RecipeWithIngredients
 
-    // TODO Write other methods.
+    @Query("SELECT * FROM instruction_table WHERE recipeId = :recipeId")
+    suspend fun getInstructionsOfRecipe(recipeId: Int): List<DatabaseInstruction>?
+
 }

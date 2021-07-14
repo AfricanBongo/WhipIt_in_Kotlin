@@ -4,7 +4,7 @@ import androidx.room.Embedded
 import androidx.room.Entity
 import androidx.room.Junction
 import androidx.room.Relation
-import com.africanbongo.spoonacularandroid.model.*
+import zw.co.bitpirates.spoonacularclient.model.*
 
 /**
  * Class used to cross-reference the [DatabaseRecipe] and [DatabaseIngredient] relations in the database.

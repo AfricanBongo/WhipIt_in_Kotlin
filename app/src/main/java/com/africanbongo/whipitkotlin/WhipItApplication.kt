@@ -1,7 +1,7 @@
 package com.africanbongo.whipitkotlin
 
 import android.app.Application
-import com.africanbongo.spoonacularandroid.service.SpoonacularApi
+import zw.co.bitpirates.spoonacularclient.service.SpoonacularApi
 import timber.log.Timber
 
 class WhipItApplication: Application() {
@@ -10,6 +10,6 @@ class WhipItApplication: Application() {
         Timber.plant(Timber.DebugTree())
 
         // Set the api key of the spoonacular client.
-        SpoonacularApi.apiKey = "ddfab49f8dd0483ba21ccf2944815631"
+        SpoonacularApi.setKey("ddfab49f8dd0483ba21ccf2944815631")
     }
 }

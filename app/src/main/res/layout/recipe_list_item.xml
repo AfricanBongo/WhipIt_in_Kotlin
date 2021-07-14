@@ -6,7 +6,7 @@
     <data>
         <variable
             name="recipe"
-            type="com.africanbongo.spoonacularandroid.model.Recipe" />
+            type="com.africanbongo.whipitkotlin.domain.DomainRecipe" />
     </data>
 
     <com.google.android.material.card.MaterialCardView

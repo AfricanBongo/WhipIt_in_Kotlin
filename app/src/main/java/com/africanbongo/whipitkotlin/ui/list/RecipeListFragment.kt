@@ -6,9 +6,17 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import com.africanbongo.whipitkotlin.databinding.FragmentListBinding
+import com.africanbongo.whipitkotlin.storage.database.RecipeDatabase
+import com.africanbongo.whipitkotlin.storage.database.RecipeRepository
+import com.africanbongo.whipitkotlin.ui.FetchResult
 import com.africanbongo.whipitkotlin.ui.bindStatusWithRecyclerView
 import com.africanbongo.whipitkotlin.ui.bindWithData
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.launch
 
 class RecipeListFragment: Fragment() {
     override fun onCreateView(
@@ -20,23 +28,29 @@ class RecipeListFragment: Fragment() {
         val binding = FragmentListBinding.inflate(inflater)
         binding.lifecycleOwner = this
 
+        val recipeDataSource = RecipeDatabase.getInstance(requireContext()).recipeDao
+        val recipeRepository = RecipeRepository(recipeDataSource)
+
         // Get ViewModel
-        val viewModel = RecipeListViewModel()
+        val viewModel = RecipeListViewModel(recipeRepository)
         binding.viewModel = viewModel
 
 
         configureSpinners(binding, viewModel)
 
-        // Observe the list of recipes and update recyclerview list.
-        viewModel.listOfRecipes.observe(viewLifecycleOwner, {
-            binding.recipeRecyclerview.bindWithData(it)
-        })
+        // Collect the result from the and update recyclerview list.
+        lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.STARTED) {
+                viewModel.recipeResult.collect { result ->
 
-        // Observe request status and update the status ImageView accordingly.
-        viewModel.status.observe(viewLifecycleOwner, {
-            binding.statusImageView.bindStatusWithRecyclerView(it, binding.recipeRecyclerview)
-        })
+                    binding.statusImageView.bindStatusWithRecyclerView(result, binding.recipeRecyclerview)
 
+                    if (result is FetchResult.Success) {
+                        binding.recipeRecyclerview.bindWithData(result.data)
+                    }
+                }
+            }
+        }
         return binding.root
     }
 

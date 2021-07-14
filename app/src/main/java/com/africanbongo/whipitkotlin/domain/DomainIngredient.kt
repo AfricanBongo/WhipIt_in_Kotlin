@@ -1,6 +1,6 @@
 package com.africanbongo.whipitkotlin.domain
 
-import com.africanbongo.spoonacularandroid.model.Ingredient
+import zw.co.bitpirates.spoonacularclient.model.Ingredient
 
 /**
  * Domain object of the network [Ingredient] object.

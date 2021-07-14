@@ -2,7 +2,7 @@ package com.africanbongo.whipitkotlin.storage.database.model
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import com.africanbongo.spoonacularandroid.model.Ingredient
+import zw.co.bitpirates.spoonacularclient.model.Ingredient
 
 /**
  * Mapping of an [Ingredient] that will be stored in the database.

@@ -5,8 +5,9 @@ import android.widget.ImageView
 import androidx.core.net.toUri
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
-import com.africanbongo.spoonacularandroid.model.Recipe
+import zw.co.bitpirates.spoonacularclient.model.Recipe
 import com.africanbongo.whipitkotlin.R
+import com.africanbongo.whipitkotlin.domain.DomainRecipe
 import com.africanbongo.whipitkotlin.ui.list.RecipeListAdapter
 
 /**
@@ -27,23 +28,23 @@ fun ImageView.fetchImage(imgUrl: String) {
 
 /**
  * Call to update the loading status using the ImageView.
- * Will set [recyclerView] to be blank when [status] is [RequestStatus.LOADING] or [RequestStatus.ERROR].
- * @param status [RequestStatus] holding state of the request.
+ * Will set [recyclerView] to be blank when [status] is [FetchResult.Loading] or [FetchResult.Error].
+ * @param status [FetchResult] holding state of the request.
  * @param recyclerView [RecyclerView] to manipulate at different requests
  */
-fun ImageView.bindStatusWithRecyclerView(status: RequestStatus, recyclerView: RecyclerView) {
+fun ImageView.bindStatusWithRecyclerView(status: FetchResult<List<DomainRecipe>>, recyclerView: RecyclerView) {
     when (status) {
-        RequestStatus.LOADING -> {
+        is FetchResult.Success -> {
             recyclerView.visibility = View.GONE
             visibility = View.VISIBLE
             setImageResource(R.drawable.ic_loading_pizza)
         }
-        RequestStatus.ERROR -> {
+        is FetchResult.Error -> {
             recyclerView.visibility = View.GONE
             visibility = View.VISIBLE
             setImageResource(R.drawable.ic_error)
         }
-        RequestStatus.DONE -> {
+        is FetchResult.Loading -> {
             recyclerView.visibility = View.VISIBLE
             visibility = View.GONE
         }
@@ -55,7 +56,7 @@ fun ImageView.bindStatusWithRecyclerView(status: RequestStatus, recyclerView: Re
  * Creates a new adapter if one hadn't been set already.
  * @param listOfItems List of [Recipe] to be displayed.
  */
-fun RecyclerView.bindWithData(listOfItems: List<Recipe>) {
+fun RecyclerView.bindWithData(listOfItems: List<DomainRecipe>) {
     if (adapter == null) adapter = RecipeListAdapter()
     (adapter as RecipeListAdapter).submitList(listOfItems)
 }

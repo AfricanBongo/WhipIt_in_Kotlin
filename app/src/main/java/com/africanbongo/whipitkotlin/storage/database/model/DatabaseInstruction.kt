@@ -2,7 +2,7 @@ package com.africanbongo.whipitkotlin.storage.database.model
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import com.africanbongo.spoonacularandroid.model.Instruction
+import zw.co.bitpirates.spoonacularclient.model.Instruction
 
 /**
  * Database model representation of the [Instruction] network model.

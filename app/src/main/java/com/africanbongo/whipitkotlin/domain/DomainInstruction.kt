@@ -1,6 +1,6 @@
 package com.africanbongo.whipitkotlin.domain
 
-import com.africanbongo.spoonacularandroid.model.Instruction
+import zw.co.bitpirates.spoonacularclient.model.Instruction
 
 /**
  * Domain model representation of the network model [Instruction].
