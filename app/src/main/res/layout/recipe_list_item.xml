@@ -6,7 +6,7 @@
     <data>
         <variable
             name="recipe"
-            type="com.africanbongo.whipitkotlin.domain.DomainRecipe" />
+            type="com.africanbongo.whipitkotlin.domain.SummarisedRecipe" />
     </data>
 
     <LinearLayout
@@ -16,84 +16,67 @@
         android:clipChildren="false"
         android:padding="10dp">
         <com.google.android.material.card.MaterialCardView
-            android:layout_width="match_parent"
+            android:layout_width="@dimen/recipe_card_image_width"
             android:layout_height="wrap_content"
-            app:cardElevation="25dp">
+            app:cardCornerRadius="@dimen/normal_corner_radius"
+            app:cardElevation="50dp">
 
-            <LinearLayout
+            <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
+                android:layout_height="wrap_content">
 
-                <!-- Media-->
                 <ImageView
-                    android:id="@+id/recipe_image_view"
+                    android:id="@+id/recipe_card_image"
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/normal_card_image_height"
+                    android:layout_height="@dimen/recipe_card_image_height"
                     tools:srcCompat="@drawable/sample_image"
-                    android:scaleType="centerCrop" />
+                    android:scaleType="centerCrop"
+                    android:contentDescription="@{String.format(@string/recipe_image_description_template, recipe.title)}" />
 
-                <!-- Title, servings and preparation time(readyInMinutes)-->
-                <LinearLayout
-                    android:layout_margin="@dimen/normal_layout_margin"
+                <TextView
+                    android:id="@+id/recipe_card_title"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical">
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:text="@{recipe.title}"
-                        android:textStyle="bold"
-                        tools:text="Pasta with Garlic, Scallions, Cauliflower &amp; Breadcrumbs"
-                        android:textAppearance="?textAppearanceListItem" />
+                    android:layout_below="@id/recipe_card_image"
+                    android:padding="@dimen/small_padding"
+                    android:maxLines="3"
+                    android:text="@{recipe.title}"
+                    style="@style/TextViewStyle.Subtitle.1.Primary"
+                    tools:text="Pasta with beef mince minestrone" />
 
-                    <TextView
-                        android:layout_marginTop="@dimen/normal_layout_margin"
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:text="@{String.format(@string/source_template, recipe.sourceName)}"
-                        android:textAppearance="?textAppearanceBody2"
-                        tools:text="by Full Belly Sisters" />
-                    <LinearLayout
-                        android:layout_marginTop="@dimen/normal_layout_margin"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal">
+                <TextView
+                    android:id="@+id/recipe_card_source"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/recipe_card_title"
+                    android:paddingHorizontal="@dimen/small_padding"
+                    android:paddingBottom="@dimen/small_padding"
+                    android:layout_marginBottom="@dimen/small_margin"
+                    android:text="@{String.format(@string/source_template, recipe.sourceName)}"
+                    style="@style/TextViewStyle.Subtitle.2.Secondary"
+                    android:maxLines="2"
+                    tools:text="By Full Belly Sisters" />
 
-                        <ImageView
-                            android:layout_width="@dimen/small_icon_dimen"
-                            android:layout_height="@dimen/small_icon_dimen"
-                            app:srcCompat="@drawable/ic_servings"
-                            android:tooltipText="@string/servings_tooltip"/>
-                        <TextView
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="@dimen/normal_layout_margin"
-                            android:layout_gravity="center"
-                            android:text="@{String.valueOf(recipe.servings)}"
-                            android:textAppearance="?textAppearanceBody1"
-                            android:layout_weight="0.5"
-                            tools:text="4" />
+                <com.africanbongo.whipitkotlin.ui.custom.SecondaryDetailViewSmall
+                    android:id="@+id/prep_time_view"
+                    android:layout_marginStart="@dimen/small_margin"
+                    android:layout_marginBottom="@dimen/small_margin"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/recipe_card_source"
+                    app:icon="@drawable/ic_prep_time"
+                    tools:text="30min"/>
 
-                        <ImageView
-                            android:layout_width="@dimen/small_icon_dimen"
-                            android:layout_height="@dimen/small_icon_dimen"
-                            android:layout_marginStart="@dimen/large_layout_margin"
-                            android:tooltipText="@string/preparation_tooltip"
-                            app:srcCompat="@drawable/ic_preparation_time" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="@dimen/small_layout_margin"
-                            android:layout_gravity="center"
-                            android:text="@{String.valueOf(recipe.readyInMinutes)}"
-                            android:textAppearance="?textAppearanceBody1"
-                            tools:text="165 min" />
-                    </LinearLayout>
-                </LinearLayout>
-
-            </LinearLayout>
+                <com.africanbongo.whipitkotlin.ui.custom.SecondaryDetailViewSmall
+                    android:id="@+id/servings_view"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toEndOf="@id/prep_time_view"
+                    android:layout_below="@id/recipe_card_source"
+                    android:layout_marginStart="@dimen/small_margin"
+                    app:icon="@drawable/ic_outline_servings"
+                    tools:text="2" />
+            </RelativeLayout>
         </com.google.android.material.card.MaterialCardView>
     </LinearLayout>
 

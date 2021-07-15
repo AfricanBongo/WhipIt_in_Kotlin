@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.AdapterView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
@@ -12,9 +11,9 @@ import androidx.lifecycle.repeatOnLifecycle
 import com.africanbongo.whipitkotlin.databinding.FragmentListBinding
 import com.africanbongo.whipitkotlin.storage.database.RecipeDatabase
 import com.africanbongo.whipitkotlin.storage.repository.RecipeRepository
-import com.africanbongo.whipitkotlin.ui.FetchResult
-import com.africanbongo.whipitkotlin.ui.bindStatusWithRecyclerView
-import com.africanbongo.whipitkotlin.ui.bindWithData
+import com.africanbongo.whipitkotlin.ui.util.FetchResult
+import com.africanbongo.whipitkotlin.ui.util.bindStatusWithRecyclerView
+import com.africanbongo.whipitkotlin.ui.util.bindWithData
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import zw.co.bitpirates.spoonacularclient.model.CuisineEnum

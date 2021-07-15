@@ -22,4 +22,6 @@ data class SummarisedRecipe(
     val spoonacularScore: Double,
     val servings: Int,
     val readyInMinutes: Int
-)
+) {
+    fun getPrepTime(): String = "${readyInMinutes}min"
+}

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Background for secondary importance views -->
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="rectangle">
+    <corners android:radius="@dimen/sharp_corner_radius" />
+    <solid android:color="@color/secondary_component_color"/>
+</shape>

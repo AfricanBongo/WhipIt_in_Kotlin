@@ -109,3 +109,14 @@ fun DatabaseRecipe.toDomainModel(
         steps = instructions?.toDomainModels(),
     )
 
+fun DatabaseRecipe.toSummarisedRecipe(): SummarisedRecipe =
+    SummarisedRecipe(
+        id = recipeId,
+        title = title,
+        imageUrl = imageUrl,
+        sourceName = sourceName,
+        spoonacularScore = spoonacularScore,
+        servings = servings,
+        readyInMinutes = readyInMinutes
+    )
+

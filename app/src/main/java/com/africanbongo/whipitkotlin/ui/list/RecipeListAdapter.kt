@@ -8,28 +8,31 @@ import androidx.recyclerview.widget.RecyclerView
 import zw.co.bitpirates.spoonacularclient.model.Recipe
 import com.africanbongo.whipitkotlin.databinding.RecipeListItemBinding
 import com.africanbongo.whipitkotlin.domain.DomainRecipe
-import com.africanbongo.whipitkotlin.ui.fetchImage
+import com.africanbongo.whipitkotlin.domain.SummarisedRecipe
+import com.africanbongo.whipitkotlin.ui.util.fetchImage
 
 /**
  * Recyclerview adapter that displays a list of [Recipe]s.
  * Use the [submitList] method to update the list shown.
  */
 class RecipeListAdapter :
-    ListAdapter<DomainRecipe, RecipeListAdapter.RecipeViewHolder>(DiffCallback) {
+    ListAdapter<SummarisedRecipe, RecipeListAdapter.RecipeViewHolder>(DiffCallback) {
     class RecipeViewHolder(private var binding: RecipeListItemBinding): RecyclerView.ViewHolder(binding.root) {
-        fun bind(recipe: DomainRecipe) {
+        fun bind(recipe: SummarisedRecipe) {
             binding.recipe = recipe
-            recipe.imageUrl?.let { binding.recipeImageView.fetchImage(it) }
+            binding.prepTimeView.setText(recipe.getPrepTime())
+            binding.servingsView.setText(recipe.servings.toString())
+            recipe.imageUrl?.let { binding.recipeCardImage.fetchImage(it) }
             binding.executePendingBindings()
         }
     }
 
-    companion object DiffCallback: DiffUtil.ItemCallback<DomainRecipe>() {
-        override fun areItemsTheSame(oldItem: DomainRecipe, newItem: DomainRecipe): Boolean {
+    companion object DiffCallback: DiffUtil.ItemCallback<SummarisedRecipe>() {
+        override fun areItemsTheSame(oldItem: SummarisedRecipe, newItem: SummarisedRecipe): Boolean {
             return oldItem == newItem
         }
 
-        override fun areContentsTheSame(oldItem: DomainRecipe, newItem: DomainRecipe): Boolean {
+        override fun areContentsTheSame(oldItem: SummarisedRecipe, newItem: SummarisedRecipe): Boolean {
             return oldItem.id == newItem.id
         }
 

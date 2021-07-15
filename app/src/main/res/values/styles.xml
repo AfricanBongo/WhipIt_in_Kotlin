@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="TextViewStyle" parent="Widget.MaterialComponents.TextView" />
+
+    <!-- TextView styles for subtitle text -->
+    <style name="TextViewStyle.Subtitle">
+        <item name="android:font">@font/roboto_regular</item>
+    </style>
+    <style name="TextViewStyle.Caption">
+        <item name="android:font">@font/roboto_regular</item>
+        <item name="android:textAppearance">@style/TextAppearance.MaterialComponents.Caption</item>
+    </style>
+    <style name="TextViewStyle.Subtitle.1">
+        <item name="android:textAppearance">@style/TextAppearance.MaterialComponents.Subtitle1</item>
+    </style>
+    <style name="TextViewStyle.Subtitle.2">
+        <item name="android:textAppearance">@style/TextAppearance.MaterialComponents.Subtitle2</item>
+    </style>
+    <style name="TextViewStyle.Subtitle.1.Primary">
+        <item name="android:textColor">@color/black</item>
+    </style>
+    <style name="TextViewStyle.Subtitle.2.Secondary">
+        <item name="android:textColor">@color/secondaryTextColor</item>
+    </style>
+    <style name="TextViewStyle.Caption.Primary">
+        <item name="android:textColor">@color/black</item>
+    </style>
+</resources>

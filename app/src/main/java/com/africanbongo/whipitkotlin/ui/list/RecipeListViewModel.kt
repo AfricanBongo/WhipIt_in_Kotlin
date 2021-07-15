@@ -3,14 +3,12 @@ package com.africanbongo.whipitkotlin.ui.list
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.africanbongo.whipitkotlin.domain.DomainRecipe
-import com.africanbongo.whipitkotlin.domain.toDomainModel
-import com.africanbongo.whipitkotlin.storage.database.model.toDatabaseModel
+import com.africanbongo.whipitkotlin.domain.SummarisedRecipe
 import com.africanbongo.whipitkotlin.storage.repository.RecipeRepository
-import com.africanbongo.whipitkotlin.ui.FetchResult
+import com.africanbongo.whipitkotlin.ui.util.FetchResult
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 import zw.co.bitpirates.spoonacularclient.model.CuisineEnum
-import zw.co.bitpirates.spoonacularclient.model.Recipe
 import zw.co.bitpirates.spoonacularclient.service.QueryNumber
 
 class RecipeListViewModel(private val repository: RecipeRepository) : ViewModel() {
@@ -31,19 +29,19 @@ class RecipeListViewModel(private val repository: RecipeRepository) : ViewModel(
      */
     val queryNumberList = _queryNumberList.map { it.value.toString() }
 
-    private val _recipeResult = MutableStateFlow<FetchResult<List<DomainRecipe>>>(FetchResult.Loading)
+    private val _recipeResult = MutableStateFlow<FetchResult<List<SummarisedRecipe>>>(FetchResult.Loading)
 
     /**
      * Request for the list of recipes fetched from the repository wrapped in a state-flow.
      */
-    val recipeResult: StateFlow<FetchResult<List<DomainRecipe>>> = _recipeResult
+    val recipeResult: StateFlow<FetchResult<List<SummarisedRecipe>>> = _recipeResult
 
     init {
 
         viewModelScope.launch {
             repository.refreshCacheFor()
 
-            repository.recipeList.collect {
+            repository.summarisedRecipesList.collect {
                 _recipeResult.value = FetchResult.success(it)
             }
         }

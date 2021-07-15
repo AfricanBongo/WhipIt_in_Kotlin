@@ -1,4 +1,4 @@
-package com.africanbongo.whipitkotlin.ui
+package com.africanbongo.whipitkotlin.ui.util
 
 /**
  * Can be used in collecting the request from a data source.

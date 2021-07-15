@@ -2,14 +2,12 @@ package com.africanbongo.whipitkotlin.storage.repository
 
 import com.africanbongo.whipitkotlin.domain.DomainRecipe
 import com.africanbongo.whipitkotlin.domain.toDomainModel
+import com.africanbongo.whipitkotlin.domain.toSummarisedRecipe
 import com.africanbongo.whipitkotlin.storage.database.RecipeDao
 import com.africanbongo.whipitkotlin.storage.database.model.*
-import com.africanbongo.whipitkotlin.ui.FetchResult
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.withContext
-import timber.log.Timber
-import zw.co.bitpirates.spoonacularclient.exception.ServerException
 import zw.co.bitpirates.spoonacularclient.model.CuisineEnum
 import zw.co.bitpirates.spoonacularclient.service.SpoonacularApi
 
@@ -20,22 +18,8 @@ import zw.co.bitpirates.spoonacularclient.service.SpoonacularApi
  */
 class RecipeRepository(private val recipeDao: RecipeDao, private val cuisine: CuisineEnum) {
 
-    val recipeList = recipeDao.getRecipesOfCuisine(cuisine.id).map { recipeList ->
-        val domainRecipes = mutableListOf<DomainRecipe>()
-
-        recipeList.forEach { recipe ->
-            val ingredients = recipeDao.getIngredientsOfRecipe(recipe.recipeId)
-            val instructions = recipeDao.getInstructionsOfRecipe(recipe.recipeId)
-            val databaseCuisine = cuisine.toDatabaseModel()
-
-            domainRecipes.add(recipe.toDomainModel(
-                cuisine = databaseCuisine,
-                ingredients = ingredients,
-                instructions = instructions
-            ))
-        }
-
-        return@map domainRecipes.toList()
+    val summarisedRecipesList = recipeDao.getRecipesOfCuisine(cuisine.id).map { recipeList ->
+        recipeList.map { it.toSummarisedRecipe() }
     }.flowOn(Dispatchers.IO)
 
     /**

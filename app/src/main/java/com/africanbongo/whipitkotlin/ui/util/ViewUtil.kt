@@ -1,4 +1,4 @@
-package com.africanbongo.whipitkotlin.ui
+package com.africanbongo.whipitkotlin.ui.util
 
 import android.view.View
 import android.widget.ImageView
@@ -9,6 +9,7 @@ import coil.size.Scale
 import zw.co.bitpirates.spoonacularclient.model.Recipe
 import com.africanbongo.whipitkotlin.R
 import com.africanbongo.whipitkotlin.domain.DomainRecipe
+import com.africanbongo.whipitkotlin.domain.SummarisedRecipe
 import com.africanbongo.whipitkotlin.ui.list.RecipeListAdapter
 
 /**
@@ -34,7 +35,7 @@ fun ImageView.fetchImage(imgUrl: String) {
  * @param status [FetchResult] holding state of the request.
  * @param recyclerView [RecyclerView] to manipulate at different requests
  */
-fun ImageView.bindStatusWithRecyclerView(status: FetchResult<List<DomainRecipe>>, recyclerView: RecyclerView) {
+fun ImageView.bindStatusWithRecyclerView(status: FetchResult<Any>, recyclerView: RecyclerView) {
     when (status) {
         is FetchResult.Loading -> {
             recyclerView.visibility = View.GONE
@@ -58,7 +59,7 @@ fun ImageView.bindStatusWithRecyclerView(status: FetchResult<List<DomainRecipe>>
  * Creates a new adapter if one hadn't been set already.
  * @param listOfItems List of [Recipe] to be displayed.
  */
-fun RecyclerView.bindWithData(listOfItems: List<DomainRecipe>) {
+fun RecyclerView.bindWithData(listOfItems: List<SummarisedRecipe>) {
     if (adapter == null) adapter = RecipeListAdapter()
     (adapter as RecipeListAdapter).submitList(listOfItems)
 }

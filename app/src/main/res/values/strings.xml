@@ -1,9 +1,17 @@
 <resources>
     <string name="app_name">WhipItKotlin</string>
     <string name="toolbar_title">WhipIt</string>
-    <string name="servings_tooltip">Servings</string>
-    <string name="preparation_tooltip">Preparation time</string>
+
+    <!-- String templates. -->
     <string name="source_template">By %s</string>
-    <string name="cuisine_title">Cuisine :</string>
-    <string name="number_title">Number :</string>
+    <string name="recipe_image_description_template">Image of %s</string>
+    <string name="prep_time_template">%s min</string>
+
+    <!-- Image content descriptions, may also be used for tooltips. -->
+    <string name="servings_description">Servings</string>
+    <string name="prep_time_description">Preparation time</string>
+
+    <!-- View content descriptions. -->
+    <!-- Titles. -->
+
 </resources>
