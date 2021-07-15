@@ -6,8 +6,8 @@ import zw.co.bitpirates.spoonacularclient.model.Ingredient
  * Domain object of the network [Ingredient] object.
  * @see Ingredient
  */
-data class DomainIngredient (
+data class DomainIngredient(
     val description: String,
-    val amount: Float,
+    val amount: Double,
     val unit: String?
 )

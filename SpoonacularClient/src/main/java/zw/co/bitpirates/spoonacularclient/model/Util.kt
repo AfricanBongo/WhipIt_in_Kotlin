@@ -6,7 +6,6 @@ package zw.co.bitpirates.spoonacularclient.model
  */
 fun List<String>?.toCuisineEnums(): List<CuisineEnum>? = this?.map {
     CuisineEnum.valueOf(
-        it.replace(" ", "_")
-            .lowercase()
+        it.uppercase()
     )
 }

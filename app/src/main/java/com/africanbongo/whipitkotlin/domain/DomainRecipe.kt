@@ -1,12 +1,12 @@
 package com.africanbongo.whipitkotlin.domain
 
-data class DomainRecipe (
+data class DomainRecipe(
     val id: Int,
     val title: String,
     val imageUrl: String?,
     val sourceName: String,
     val sourceUrl: String,
-    val spoonacularScore: Float,
+    val spoonacularScore: Double,
     val servings: Int,
     val readyInMinutes: Int,
     val cuisine: String,
@@ -19,7 +19,7 @@ data class SummarisedRecipe(
     val title: String,
     val imageUrl: String?,
     val sourceName: String,
-    val spoonacularScore: Float,
+    val spoonacularScore: Double,
     val servings: Int,
     val readyInMinutes: Int
 )

@@ -9,85 +9,92 @@
             type="com.africanbongo.whipitkotlin.domain.DomainRecipe" />
     </data>
 
-    <com.google.android.material.card.MaterialCardView
-         android:layout_width="match_parent"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:cardElevation="@dimen/normal_layout_margin"
-        app:cardUseCompatPadding="true">
-
-        <LinearLayout
+        android:clipToPadding="false"
+        android:clipChildren="false"
+        android:padding="10dp">
+        <com.google.android.material.card.MaterialCardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            app:cardElevation="25dp">
 
-            <!-- Media-->
-            <ImageView
-                android:id="@+id/recipe_image_view"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/normal_card_image_height"
-                tools:srcCompat="@drawable/sample_image"
-                android:scaleType="centerCrop" />
-
-            <!-- Title, servings and preparation time(readyInMinutes)-->
             <LinearLayout
-                android:layout_margin="@dimen/normal_layout_margin"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:text="@{recipe.title}"
-                    android:textStyle="bold"
-                    tools:text="Pasta with Garlic, Scallions, Cauliflower &amp; Breadcrumbs"
-                    android:textAppearance="?textAppearanceListItem" />
 
-                <TextView
-                    android:layout_marginTop="@dimen/normal_layout_margin"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:text="@{String.format(@string/source_template, recipe.sourceName)}"
-                    android:textAppearance="?textAppearanceBody2"
-                    tools:text="by Full Belly Sisters" />
+                <!-- Media-->
+                <ImageView
+                    android:id="@+id/recipe_image_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/normal_card_image_height"
+                    tools:srcCompat="@drawable/sample_image"
+                    android:scaleType="centerCrop" />
+
+                <!-- Title, servings and preparation time(readyInMinutes)-->
                 <LinearLayout
-                    android:layout_marginTop="@dimen/normal_layout_margin"
+                    android:layout_margin="@dimen/normal_layout_margin"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-
-                    <ImageView
-                        android:layout_width="@dimen/small_icon_dimen"
-                        android:layout_height="@dimen/small_icon_dimen"
-                        app:srcCompat="@drawable/ic_servings"
-                        android:tooltipText="@string/servings_tooltip"/>
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="@dimen/normal_layout_margin"
-                        android:layout_gravity="center"
-                        android:text="@{String.valueOf(recipe.servings)}"
-                        android:textAppearance="?textAppearanceBody1"
-                        android:layout_weight="0.5"
-                        tools:text="4" />
-
-                    <ImageView
-                        android:layout_width="@dimen/small_icon_dimen"
-                        android:layout_height="@dimen/small_icon_dimen"
-                        android:layout_marginStart="@dimen/large_layout_margin"
-                        android:tooltipText="@string/preparation_tooltip"
-                        app:srcCompat="@drawable/ic_preparation_time" />
-
+                    android:orientation="vertical">
                     <TextView
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="@dimen/small_layout_margin"
-                        android:layout_gravity="center"
-                        android:text="@{String.valueOf(recipe.readyInMinutes)}"
-                        android:textAppearance="?textAppearanceBody1"
-                        tools:text="165 min" />
-                </LinearLayout>
-            </LinearLayout>
+                        android:layout_height="match_parent"
+                        android:text="@{recipe.title}"
+                        android:textStyle="bold"
+                        tools:text="Pasta with Garlic, Scallions, Cauliflower &amp; Breadcrumbs"
+                        android:textAppearance="?textAppearanceListItem" />
 
-        </LinearLayout>
-    </com.google.android.material.card.MaterialCardView>
+                    <TextView
+                        android:layout_marginTop="@dimen/normal_layout_margin"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:text="@{String.format(@string/source_template, recipe.sourceName)}"
+                        android:textAppearance="?textAppearanceBody2"
+                        tools:text="by Full Belly Sisters" />
+                    <LinearLayout
+                        android:layout_marginTop="@dimen/normal_layout_margin"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:layout_width="@dimen/small_icon_dimen"
+                            android:layout_height="@dimen/small_icon_dimen"
+                            app:srcCompat="@drawable/ic_servings"
+                            android:tooltipText="@string/servings_tooltip"/>
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/normal_layout_margin"
+                            android:layout_gravity="center"
+                            android:text="@{String.valueOf(recipe.servings)}"
+                            android:textAppearance="?textAppearanceBody1"
+                            android:layout_weight="0.5"
+                            tools:text="4" />
+
+                        <ImageView
+                            android:layout_width="@dimen/small_icon_dimen"
+                            android:layout_height="@dimen/small_icon_dimen"
+                            android:layout_marginStart="@dimen/large_layout_margin"
+                            android:tooltipText="@string/preparation_tooltip"
+                            app:srcCompat="@drawable/ic_preparation_time" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/small_layout_margin"
+                            android:layout_gravity="center"
+                            android:text="@{String.valueOf(recipe.readyInMinutes)}"
+                            android:textAppearance="?textAppearanceBody1"
+                            tools:text="165 min" />
+                    </LinearLayout>
+                </LinearLayout>
+
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+    </LinearLayout>
+
 </layout>

@@ -21,7 +21,7 @@ data class Recipe (
     val readyInMinutes: Int,
     val sourceName: String,
     val sourceUrl: String,
-    val spoonacularScore: Float,
+    val spoonacularScore: Double,
     val healthScore: Int,
     val weightWatcherSmartPoints: Int,
     val vegetarian: Boolean?,
@@ -53,7 +53,7 @@ data class Recipe (
      * The list of cuisines the recipe belongs to.
      * Use the [toCuisineEnums] method on the list to map them into [CuisineEnum]s.
      */
-    val cuisine: List<String>?
+    val cuisines: List<String>?
 ) {
     /**
      * Get the [Steps] object with the list of steps used in the recipe.

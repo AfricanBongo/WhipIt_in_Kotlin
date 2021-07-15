@@ -38,6 +38,12 @@ private fun List<CuisineEnum>?.toDatabaseModels(): List<DatabaseCuisine>? = this
 }
 
 /**
+ * Map a [CuisineEnum] into a [DatabaseCuisine].
+ * @return A mapped [DatabaseCuisine] object.
+ */
+fun CuisineEnum.toDatabaseModel() = DatabaseCuisine(cuisineId = id, type = type)
+
+/**
  * Parse a network model [Recipe] into a [DecomposedBundle].
  * @return A [DecomposedBundle].
  * @see DecomposedBundle
@@ -56,7 +62,7 @@ fun Recipe.decompose(): DecomposedBundle {
 
     val listOfIngredients = ingredients.toDatabaseModels()
     val listOfInstructions = getInstructions()?.listOfInstructions?.toDatabaseModels(id)
-    val listOfCuisines = cuisine.toCuisineEnums().toDatabaseModels()
+    val listOfCuisines = cuisines.toCuisineEnums().toDatabaseModels()
 
     return DecomposedBundle(
         databaseRecipe to listOfIngredients,

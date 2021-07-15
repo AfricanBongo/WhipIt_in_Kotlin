@@ -8,7 +8,7 @@ import com.squareup.moshi.JsonClass
 @JsonClass(generateAdapter = true)
 data class Ingredient (
     val id: Int,
-    val amount: Float,
+    val amount: Double,
     val unit: String?,
     val image: String?,
     val name: String,

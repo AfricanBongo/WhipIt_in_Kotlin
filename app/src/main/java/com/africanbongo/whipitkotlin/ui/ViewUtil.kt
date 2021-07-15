@@ -5,6 +5,7 @@ import android.widget.ImageView
 import androidx.core.net.toUri
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
+import coil.size.Scale
 import zw.co.bitpirates.spoonacularclient.model.Recipe
 import com.africanbongo.whipitkotlin.R
 import com.africanbongo.whipitkotlin.domain.DomainRecipe
@@ -23,6 +24,7 @@ fun ImageView.fetchImage(imgUrl: String) {
         placeholder(R.drawable.ic_placeholder)
         error(R.drawable.ic_image_not_found)
         crossfade(true)
+        scale(Scale.FILL)
     }
 }
 
@@ -34,7 +36,7 @@ fun ImageView.fetchImage(imgUrl: String) {
  */
 fun ImageView.bindStatusWithRecyclerView(status: FetchResult<List<DomainRecipe>>, recyclerView: RecyclerView) {
     when (status) {
-        is FetchResult.Success -> {
+        is FetchResult.Loading -> {
             recyclerView.visibility = View.GONE
             visibility = View.VISIBLE
             setImageResource(R.drawable.ic_loading_pizza)
@@ -44,7 +46,7 @@ fun ImageView.bindStatusWithRecyclerView(status: FetchResult<List<DomainRecipe>>
             visibility = View.VISIBLE
             setImageResource(R.drawable.ic_error)
         }
-        is FetchResult.Loading -> {
+        is FetchResult.Success -> {
             recyclerView.visibility = View.VISIBLE
             visibility = View.GONE
         }

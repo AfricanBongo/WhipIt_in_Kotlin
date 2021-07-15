@@ -3,6 +3,7 @@ package com.africanbongo.whipitkotlin.storage.database
 import androidx.room.*
 import zw.co.bitpirates.spoonacularclient.model.Ingredient
 import com.africanbongo.whipitkotlin.storage.database.model.*
+import kotlinx.coroutines.flow.Flow
 
 /**
  * Data Access Object to manipulate the database that holds the following:
@@ -60,24 +61,28 @@ interface RecipeDao {
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun insertRecipeCuisineCrossRef(list: List<RecipeCuisineCrossRef>)
 
-    /**
-     * Fetch a cuisine with its associated recipes.
-     * @param cuisineId The id used to locate the cuisine to return.
-     * @return A cuisine with its associated list of recipe IDs.
-     */
-    @Transaction
-    @Query("SELECT * FROM cuisine_table WHERE cuisineId = :cuisineId")
-    suspend fun getCuisineWithRecipes(cuisineId: Int): CuisineWithRecipeIds
 
     /**
-     * Fetch a recipe with its associated ingredients.
+     * Fetch the associated recipes of a cuisine.
+     * @param cuisineId The id used to locate the recipes to return.
+     * @return A list of recipes.
+     */
+    @Query("SELECT * FROM recipe_table LEFT JOIN rc_table ON recipe_table.recipeId=rc_table.recipeId WHERE cuisineId = :cuisineId")
+    fun getRecipesOfCuisine(cuisineId: Int): Flow<List<DatabaseRecipe>>
+
+    /**
+     * Fetch the associated ingredients of a recipe.
      * @param recipeId The id used to locate the recipe to return.
-     * @return A recipe with its associated list of recipe IDs.
+     * @return A list of ingredients.
      */
-    @Transaction
-    @Query("SELECT * FROM recipe_table WHERE recipeId = :recipeId")
-    suspend fun getRecipeWithIngredients(recipeId: Int): RecipeWithIngredients
+    @Query("SELECT * FROM ingredient_table LEFT JOIN ri_table ON ingredient_table.ingredientId=ri_table.ingredientId WHERE recipeId = :recipeId")
+    suspend fun getIngredientsOfRecipe(recipeId: Int): List<DatabaseIngredient>
 
+    /**
+     * Fetch the instructions pertaining to a specific recipe.
+     * @param recipeId The id used to locate the instructions to return.
+     * @return A list of instructions.
+     */
     @Query("SELECT * FROM instruction_table WHERE recipeId = :recipeId")
     suspend fun getInstructionsOfRecipe(recipeId: Int): List<DatabaseInstruction>?
 
