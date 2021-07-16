@@ -1,8 +1,6 @@
 package com.africanbongo.whipitkotlin.storage.repository
 
-import com.africanbongo.whipitkotlin.domain.DomainRecipe
-import com.africanbongo.whipitkotlin.domain.toDomainModel
-import com.africanbongo.whipitkotlin.domain.toSummarisedRecipe
+import com.africanbongo.whipitkotlin.domain.*
 import com.africanbongo.whipitkotlin.storage.database.RecipeDao
 import com.africanbongo.whipitkotlin.storage.database.model.*
 import kotlinx.coroutines.Dispatchers
@@ -18,6 +16,10 @@ import zw.co.bitpirates.spoonacularclient.service.SpoonacularApi
  */
 class RecipeRepository(private val recipeDao: RecipeDao, private val cuisine: CuisineEnum) {
 
+    /**
+     * A list of summarised recipes fetched from storage.
+     * @see SummarisedRecipe
+     */
     val summarisedRecipesList = recipeDao.getRecipesOfCuisine(cuisine.id).map { recipeList ->
         recipeList.map { it.toSummarisedRecipe() }
     }.flowOn(Dispatchers.IO)

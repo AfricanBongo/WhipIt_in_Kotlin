@@ -8,7 +8,6 @@ import coil.load
 import coil.size.Scale
 import zw.co.bitpirates.spoonacularclient.model.Recipe
 import com.africanbongo.whipitkotlin.R
-import com.africanbongo.whipitkotlin.domain.DomainRecipe
 import com.africanbongo.whipitkotlin.domain.SummarisedRecipe
 import com.africanbongo.whipitkotlin.ui.list.RecipeListAdapter
 

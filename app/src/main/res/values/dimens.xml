@@ -10,6 +10,7 @@
     <dimen name="medium_padding">16dp</dimen>
 
     <!-- Spacing/margin sizes. -->
+    <dimen name="minute_margin">4dp</dimen>
     <dimen name="small_margin">@dimen/small_padding</dimen>
     <dimen name="medium_margin">@dimen/medium_padding</dimen>
     <dimen name="large_margin">24dp</dimen>

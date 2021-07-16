@@ -9,3 +9,11 @@ fun List<String>?.toCuisineEnums(): List<CuisineEnum>? = this?.map {
         it.uppercase()
     )
 }
+
+/**
+ * Transform a list of [CuisineEnum] to a list of Strings.
+ */
+fun List<CuisineEnum>.asStrings(): List<String> =
+    map { cuisine ->
+        cuisine.type.replaceFirstChar { it.titlecase() }
+    }

@@ -25,19 +25,38 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
-                <ImageView
-                    android:id="@+id/recipe_card_image"
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/recipe_card_image_height"
-                    tools:srcCompat="@drawable/sample_image"
-                    android:scaleType="centerCrop"
-                    android:contentDescription="@{String.format(@string/recipe_image_description_template, recipe.title)}" />
+                <FrameLayout
+                    android:id="@+id/recipe_frame_layout"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentEnd="true">
+
+                    <ImageView
+                        android:id="@+id/recipe_card_image"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/recipe_card_image_height"
+                        android:contentDescription="@{String.format(@string/recipe_image_description_template, recipe.title)}"
+                        android:scaleType="centerCrop"
+                        tools:srcCompat="@drawable/sample_image" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="bottom|end"
+                        android:layout_margin="@dimen/minute_margin"
+                        style="@style/RatingTextView"
+                        android:text="@{recipe.rating}"
+                        tools:text="4.5"
+                        app:drawableEndCompat="@drawable/ic_rating" />
+                </FrameLayout>
 
                 <TextView
                     android:id="@+id/recipe_card_title"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_below="@id/recipe_card_image"
+                    android:layout_below="@id/recipe_frame_layout"
                     android:padding="@dimen/small_padding"
                     android:maxLines="3"
                     android:text="@{recipe.title}"
@@ -57,25 +76,29 @@
                     android:maxLines="2"
                     tools:text="By Full Belly Sisters" />
 
-                <com.africanbongo.whipitkotlin.ui.custom.SecondaryDetailViewSmall
+                <TextView
                     android:id="@+id/prep_time_view"
                     android:layout_marginStart="@dimen/small_margin"
                     android:layout_marginBottom="@dimen/small_margin"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_below="@id/recipe_card_source"
-                    app:icon="@drawable/ic_prep_time"
+                    style="@style/IconTextView"
+                    app:drawableStartCompat="@drawable/ic_prep_time"
+                    android:text="@{recipe.prepTime}"
                     tools:text="30min"/>
 
-                <com.africanbongo.whipitkotlin.ui.custom.SecondaryDetailViewSmall
+                <TextView
                     android:id="@+id/servings_view"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_toEndOf="@id/prep_time_view"
                     android:layout_below="@id/recipe_card_source"
                     android:layout_marginStart="@dimen/small_margin"
-                    app:icon="@drawable/ic_outline_servings"
-                    tools:text="2" />
+                    android:text="@{String.valueOf(recipe.servings)}"
+                    tools:text="2"
+                    style="@style/IconTextView"
+                    app:drawableStartCompat="@drawable/ic_outline_servings" />
             </RelativeLayout>
         </com.google.android.material.card.MaterialCardView>
     </LinearLayout>

@@ -10,8 +10,12 @@
     <!-- Image content descriptions, may also be used for tooltips. -->
     <string name="servings_description">Servings</string>
     <string name="prep_time_description">Preparation time</string>
+    <string name="spoonacular_rating_description">Spoonacular rating</string>
 
     <!-- View content descriptions. -->
-    <!-- Titles. -->
+    <string name="servings_view_description">Servings is for %d</string>
+    <string name="prep_time_view_description">Preparation time is %d minutes</string>
 
+    <!-- Titles. -->
+    <string name="cuisine_title">Cuisine</string>
 </resources>

@@ -7,7 +7,6 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import zw.co.bitpirates.spoonacularclient.model.Recipe
 import com.africanbongo.whipitkotlin.databinding.RecipeListItemBinding
-import com.africanbongo.whipitkotlin.domain.DomainRecipe
 import com.africanbongo.whipitkotlin.domain.SummarisedRecipe
 import com.africanbongo.whipitkotlin.ui.util.fetchImage
 
@@ -20,8 +19,6 @@ class RecipeListAdapter :
     class RecipeViewHolder(private var binding: RecipeListItemBinding): RecyclerView.ViewHolder(binding.root) {
         fun bind(recipe: SummarisedRecipe) {
             binding.recipe = recipe
-            binding.prepTimeView.setText(recipe.getPrepTime())
-            binding.servingsView.setText(recipe.servings.toString())
             recipe.imageUrl?.let { binding.recipeCardImage.fetchImage(it) }
             binding.executePendingBindings()
         }

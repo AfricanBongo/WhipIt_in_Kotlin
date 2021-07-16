@@ -46,10 +46,10 @@ import com.africanbongo.whipitkotlin.storage.database.model.DatabaseRecipe
 //    )
 
 /**
- * Truncate a [DomainRecipe] into a [SummarisedRecipe]
- * @return [SummarisedRecipe] mapped from the [DomainRecipe] model.
+ * Truncate a [FullRecipe] into a [SummarisedRecipe]
+ * @return [SummarisedRecipe] mapped from the [FullRecipe] model.
  */
-fun DomainRecipe.toSummarisedRecipe(): SummarisedRecipe =
+fun FullRecipe.toSummarisedRecipe(): SummarisedRecipe =
     SummarisedRecipe(
         id = id,
         title = title,
@@ -85,17 +85,17 @@ private fun List<DatabaseInstruction>.toDomainModels(): List<DomainInstruction> 
 }.sortedBy { it.number }
 
 /**
- * Map a [DatabaseRecipe] object into a [DomainRecipe] object
+ * Map a [DatabaseRecipe] object into a [FullRecipe] object
  * Combine with [DatabaseIngredient]s and [DatabaseInstruction]s into one object.
  * @param ingredients List of ingredients fetched from the database.
  * @param instructions List of instructions fetched from the database.
- * @return A mapped [DomainRecipe].
+ * @return A mapped [FullRecipe].
  */
 fun DatabaseRecipe.toDomainModel(
     cuisine: DatabaseCuisine,
     ingredients: List<DatabaseIngredient>,
-    instructions: List<DatabaseInstruction>?): DomainRecipe =
-    DomainRecipe(
+    instructions: List<DatabaseInstruction>?): FullRecipe =
+    FullRecipe(
         id = recipeId,
         title = title,
         imageUrl = imageUrl,
