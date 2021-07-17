@@ -14,20 +14,20 @@ import zw.co.bitpirates.spoonacularclient.service.SpoonacularApi
  * Caches the recipes in memory just in case of a network failure.
  * @param recipeDao The Dao used to fetch data.
  */
-class RecipeRepository(private val recipeDao: RecipeDao, private val cuisine: CuisineEnum) {
+class RecipeRepository(private val recipeDao: RecipeDao) {
+
+    private var _summarisedRecipesList = MutableStateFlow<List<SummarisedRecipe>>(emptyList())
 
     /**
      * A list of summarised recipes fetched from storage.
      * @see SummarisedRecipe
      */
-    val summarisedRecipesList = recipeDao.getRecipesOfCuisine(cuisine.id).map { recipeList ->
-        recipeList.map { it.toSummarisedRecipe() }
-    }.flowOn(Dispatchers.IO)
+    val summarisedRecipeList: StateFlow<List<SummarisedRecipe>> = _summarisedRecipesList
 
     /**
      * Refresh the cache containing the list of recipes of a certain cuisine.
      */
-    suspend fun refreshCacheFor() = withContext(Dispatchers.IO) {
+    suspend fun refreshCacheFor(cuisine: CuisineEnum) = withContext(Dispatchers.IO) {
         // Fetch the list of recipes from the network server asynchronously.
         // Parse it into DecomposedBundles and then store them in the database as an async task.
 
@@ -54,5 +54,15 @@ class RecipeRepository(private val recipeDao: RecipeDao, private val cuisine: Cu
             recipeDao.insertRecipeIngredientCrossRefs(riCrossRefs)
             rcCrossRefs?.let { recipeDao.insertRecipeCuisineCrossRef(it) }
         }
+
+        _summarisedRecipesList.value =
+            if (cuisine == CuisineEnum.NONE)
+                recipeDao.getAllRecipes().map {
+                    it.toSummarisedRecipe()
+                }
+            else
+                recipeDao.getRecipesOfCuisine(cuisine.id).map {
+                    it.toSummarisedRecipe()
+                }
     }
 }

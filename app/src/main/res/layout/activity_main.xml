@@ -6,58 +6,25 @@
     xmlns:tools="http://schemas.android.com/tools">
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:fillViewport="true">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:clipChildren="false"
-            android:clipToPadding="true">
-
-            <!-- Cuisine title -->
-            <TextView
-                android:id="@+id/cuisine_title"
-                style="@style/TextViewStyle.Headline.5.OnSurface"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="@dimen/small_margin"
-                android:text="@string/cuisine_title"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <!-- Cuisine selection chip group -->
-            <HorizontalScrollView
-                android:id="@+id/cuisine_scroll_view"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/small_margin"
-                android:layout_marginTop="@dimen/small_margin"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/cuisine_title"
-                app:layout_constraintBottom_toTopOf="@id/nav_host_fragment">
-                <com.google.android.material.chip.ChipGroup
-                    android:id="@+id/cuisine_chip_group"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    style="@style/ChipStyle"
-                    app:singleLine="true"
-                    app:singleSelection="true"/>
-            </HorizontalScrollView>
+            android:layout_height="match_parent">
 
             <!-- Recipe list of a certain cuisine -->
             <fragment
                 android:id="@+id/nav_host_fragment"
                 android:name="androidx.navigation.fragment.NavHostFragment"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:minHeight="500dp"
-                app:defaultNavHost="true"
+                android:layout_height="match_parent"
                 android:layout_marginTop="@dimen/small_margin"
-                app:layout_constraintTop_toBottomOf="@id/cuisine_scroll_view"
+                app:defaultNavHost="true"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
                 app:navGraph="@navigation/nav_graph"
                 tools:ignore="FragmentTagUsage" />
         </androidx.constraintlayout.widget.ConstraintLayout>

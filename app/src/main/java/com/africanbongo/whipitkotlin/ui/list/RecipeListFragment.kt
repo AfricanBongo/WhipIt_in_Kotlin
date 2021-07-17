@@ -14,9 +14,12 @@ import com.africanbongo.whipitkotlin.storage.repository.RecipeRepository
 import com.africanbongo.whipitkotlin.ui.util.FetchResult
 import com.africanbongo.whipitkotlin.ui.util.bindStatusWithRecyclerView
 import com.africanbongo.whipitkotlin.ui.util.bindWithData
+import com.google.android.material.chip.Chip
+import com.google.android.material.chip.ChipGroup
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import zw.co.bitpirates.spoonacularclient.model.CuisineEnum
+import zw.co.bitpirates.spoonacularclient.model.asStrings
 
 class RecipeListFragment: Fragment() {
     override fun onCreateView(
@@ -26,29 +29,55 @@ class RecipeListFragment: Fragment() {
     ): View {
 
         val binding = FragmentListBinding.inflate(inflater)
-        binding.lifecycleOwner = this
-
-        val recipeDataSource = RecipeDatabase.getInstance(requireContext()).recipeDao
-        val recipeRepository = RecipeRepository(recipeDataSource, CuisineEnum.FRENCH)
 
         // Get ViewModel
-        val viewModel = RecipeListViewModel(recipeRepository)
+        val viewModel = createViewModel()
         binding.viewModel = viewModel
+
+        configureChipGroup(binding.cuisineChipGroup, viewModel)
 
         // Collect the result from the and update recyclerview list.
         lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
                 viewModel.recipeResult.collect { result ->
 
-                    binding.statusImageView.bindStatusWithRecyclerView(result, binding.recipeRecyclerview)
-
                     if (result is FetchResult.Success) {
                         binding.recipeRecyclerview.bindWithData(result.data)
                     }
+
+                    binding.loadingStatusView.bindStatusWithRecyclerView(result, binding.recipeRecyclerview)
                 }
             }
         }
+
+        binding.lifecycleOwner = this
         return binding.root
     }
 
+    private fun createViewModel(): RecipeListViewModel {
+        val recipeDataSource = RecipeDatabase.getInstance(requireContext()).recipeDao
+        val recipeRepository = RecipeRepository(recipeDataSource)
+        return RecipeListViewModel(recipeRepository)
+    }
+
+    /**
+     * Add chips into chip-group and bind with the view-model.
+     */
+    private fun configureChipGroup(chipGroup: ChipGroup, viewModel: RecipeListViewModel) {
+        viewModel.cuisineTypes.forEachIndexed { index, cuisine ->
+            chipGroup.addView(Chip(requireContext()).apply {
+                text = cuisine
+                id = index + 1
+            })
+        }
+
+        // When a chip is checked change the cuisine.
+        chipGroup.setOnCheckedChangeListener { _, checkedId ->
+            viewModel.changeCuisine(checkedId - 1)
+        }
+
+        // Check the first chip by default
+        val firstChipId = 1
+        chipGroup.check(firstChipId)
+    }
 }

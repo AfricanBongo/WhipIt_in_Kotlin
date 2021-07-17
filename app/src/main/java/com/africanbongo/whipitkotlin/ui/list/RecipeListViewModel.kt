@@ -5,32 +5,29 @@ import androidx.lifecycle.viewModelScope
 import com.africanbongo.whipitkotlin.domain.SummarisedRecipe
 import com.africanbongo.whipitkotlin.storage.repository.RecipeRepository
 import com.africanbongo.whipitkotlin.ui.util.FetchResult
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import zw.co.bitpirates.spoonacularclient.model.CuisineEnum
 import zw.co.bitpirates.spoonacularclient.model.asStrings
 import zw.co.bitpirates.spoonacularclient.service.QueryNumber
 
 class RecipeListViewModel(private val repository: RecipeRepository) : ViewModel() {
 
-    private val _queryNumberList = QueryNumber.values().asList()
     private val _cuisineTypes = CuisineEnum.values().asList()
     private val _recipeResult = MutableStateFlow<FetchResult<List<SummarisedRecipe>>>(FetchResult.Loading)
-
-    private var currentNumber: QueryNumber = QueryNumber.MEDIUM
-    private var currentCuisineEnum: CuisineEnum = CuisineEnum.AMERICAN
 
     /**
      * A list of the [CuisineEnum] enums.
      */
-    val cuisineTypes = _cuisineTypes.asStrings()
+    val cuisineTypes = _cuisineTypes.asStrings().toMutableList().apply {
+        if (this[0] == "None") this[0] = "Random"
+    }.toList()
 
-    /**
-     * A list of the [QueryNumber] enums.
-     */
-    val queryNumberList = _queryNumberList.map { it.value.toString() }
 
     /**
      * Request for the list of recipes fetched from the repository wrapped in a state-flow.
@@ -38,21 +35,23 @@ class RecipeListViewModel(private val repository: RecipeRepository) : ViewModel(
     val recipeResult: StateFlow<FetchResult<List<SummarisedRecipe>>> = _recipeResult
 
     init {
-
         viewModelScope.launch {
-            repository.refreshCacheFor()
-
-            repository.summarisedRecipesList.collect {
-                _recipeResult.value = FetchResult.success(it)
+            withContext(Dispatchers.IO) {
+                repository.summarisedRecipeList.collect {
+                    _recipeResult.value = FetchResult.success(it)
+                }
             }
         }
     }
 
     /**
-     * Change the [CuisineEnum] that should be used in fetching the list of recipes
+     * Change the [CuisineEnum] that should be used in fetching the list of recipes.
      * @param listPosition The position of the number in the [cuisineTypes].
      */
     fun changeCuisine(listPosition: Int) {
-        currentCuisineEnum = _cuisineTypes[listPosition]
+        _recipeResult.value = FetchResult.Loading
+        viewModelScope.launch {
+            repository.refreshCacheFor(_cuisineTypes[listPosition])
+        }
     }
 }

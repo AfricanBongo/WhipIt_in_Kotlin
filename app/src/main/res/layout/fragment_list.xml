@@ -16,32 +16,73 @@
         android:clipToPadding="false"
         tools:context=".MainActivity">
 
+        <!-- Cuisine title -->
+        <TextView
+            android:id="@+id/cuisine_title"
+            style="@style/TextViewStyle.Headline.5.OnSurface"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/small_margin"
+            android:text="@string/cuisine_title"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <!-- Cuisine selection chip group -->
+        <HorizontalScrollView
+            android:id="@+id/cuisine_scroll_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/small_margin"
+            android:layout_marginTop="@dimen/small_margin"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/cuisine_title">
+            <com.google.android.material.chip.ChipGroup
+                android:id="@+id/cuisine_chip_group"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="@style/ChipStyle"
+                app:singleLine="true"
+                app:singleSelection="true">
+            </com.google.android.material.chip.ChipGroup>
+        </HorizontalScrollView>
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recipe_recyclerview"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:orientation="vertical"
             android:clipChildren="false"
             app:layoutManager="androidx.recyclerview.widget.StaggeredGridLayoutManager"
             app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior"
+            app:flow_verticalAlign="top"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/cuisine_scroll_view"
             app:spanCount="2"
             tools:listitem="@layout/recipe_list_item" />
 
         <!-- Show the status of the content in the recyclerview -->
 
-        <ImageView
-            android:id="@+id/status_image_view"
-            android:layout_width="@dimen/medium_icon_size"
-            android:layout_height="@dimen/medium_icon_size"
-            android:layout_gravity="center"
+        <FrameLayout
+            android:id="@+id/loading_status_view"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:background="@color/white"
+            android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toBottomOf="@id/cuisine_scroll_view">
+            <ImageView
+                android:id="@+id/status_image_view"
+                android:layout_width="@dimen/medium_icon_size"
+                android:layout_height="@dimen/medium_icon_size"
+                android:layout_gravity="center" />
+        </FrameLayout>
+
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

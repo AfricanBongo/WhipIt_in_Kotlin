@@ -61,14 +61,19 @@ interface RecipeDao {
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun insertRecipeCuisineCrossRef(list: List<RecipeCuisineCrossRef>)
 
+    /**
+     * Fetch all the recipes from the database.
+     */
+    @Query("SELECT * FROM recipe_table ORDER BY RANDOM() LIMIT 20")
+    suspend fun getAllRecipes(): List<DatabaseRecipe>
 
     /**
      * Fetch the associated recipes of a cuisine.
      * @param cuisineId The id used to locate the recipes to return.
      * @return A list of recipes.
      */
-    @Query("SELECT * FROM recipe_table LEFT JOIN rc_table ON recipe_table.recipeId=rc_table.recipeId WHERE cuisineId = :cuisineId")
-    fun getRecipesOfCuisine(cuisineId: Int): Flow<List<DatabaseRecipe>>
+    @Query("SELECT * FROM recipe_table LEFT JOIN rc_table ON recipe_table.recipeId=rc_table.recipeId WHERE cuisineId = :cuisineId ORDER BY RANDOM() LIMIT 20")
+    suspend fun getRecipesOfCuisine(cuisineId: Int): List<DatabaseRecipe>
 
     /**
      * Fetch the associated ingredients of a recipe.

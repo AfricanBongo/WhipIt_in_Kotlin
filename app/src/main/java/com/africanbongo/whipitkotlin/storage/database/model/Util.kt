@@ -1,6 +1,7 @@
 package com.africanbongo.whipitkotlin.storage.database.model
 
 import zw.co.bitpirates.spoonacularclient.model.*
+import kotlin.random.Random
 
 /**
  * Map a list of [Ingredient] into a list of [DatabaseIngredient].
@@ -8,7 +9,7 @@ import zw.co.bitpirates.spoonacularclient.model.*
  */
 private fun List<Ingredient>.toDatabaseModels(): List<DatabaseIngredient> = map { ingredient ->
     DatabaseIngredient(
-        ingredientId = ingredient.id,
+        ingredientId = ingredient.id ?: Random.nextInt(1, Int.MAX_VALUE),
         description = ingredient.originalName,
         amount = ingredient.amount,
         unit = ingredient.unit

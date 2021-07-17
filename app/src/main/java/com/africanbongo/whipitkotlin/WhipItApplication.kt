@@ -10,6 +10,6 @@ class WhipItApplication: Application() {
         Timber.plant(Timber.DebugTree())
 
         // Set the api key of the spoonacular client.
-        SpoonacularApi.setKey("ddfab49f8dd0483ba21ccf2944815631")
+        SpoonacularApi.setKey("ab97a6990e0a441aa7969e73c3c40e3b")
     }
 }
