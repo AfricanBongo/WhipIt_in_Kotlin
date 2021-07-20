@@ -18,4 +18,8 @@
 
     <!-- Titles. -->
     <string name="cuisine_title">Cuisine</string>
+    <string name="discover_title">Discover</string>
+    <string name="recipe_of_the_day_title">Recipe of the day</string>
+    <string name="recipe_sample_title">Pasta with beef mince minestrone</string>
+    <string name="recipe_sample_source">By Full Belly Sisters</string>
 </resources>

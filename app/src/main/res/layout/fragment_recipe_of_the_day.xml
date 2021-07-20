@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <variable
+            name="recipe"
+            type="com.africanbongo.whipitkotlin.domain.SummarisedRecipe" />
+    </data>
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="350dp"
+        tools:context=".ui.recipeoftheday.RecipeOfTheDayFragment">
+
+        <com.africanbongo.whipitkotlin.ui.recipeoftheday.CircleBackground
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/discover_heading"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/medium_margin"
+                android:layout_marginHorizontal="@dimen/medium_margin"
+                android:layout_marginBottom="@dimen/small_margin"
+                style="@style/TextViewStyle.Headline.3.OnBackground"
+                android:text="@string/discover_title" />
+
+            <TextView
+                android:id="@+id/discover_phrase"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="@style/TextViewStyle.Headline.5.OnPrimary"
+                android:layout_marginHorizontal="@dimen/medium_margin"
+                android:text="Hey! Let's cook something new tonight, the recipe is on us!"
+                tools:ignore="HardcodedText" />
+        </LinearLayout>
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            android:layout_gravity="bottom"
+            android:layout_marginHorizontal="@dimen/very_large_margin"
+            android:layout_marginBottom="@dimen/large_margin"
+            app:cardCornerRadius="@dimen/normal_corner_radius"
+            app:cardElevation="@dimen/card_elevation">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:paddingVertical="@dimen/small_padding"
+                android:paddingHorizontal="@dimen/medium_padding">
+                <TextView
+                    android:id="@+id/rotd_heading"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    style="@style/TextViewStyle.Headline.5.OnSurface"
+                    android:text="@string/recipe_of_the_day_title" />
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/rotd_image_card_view"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:cardElevation="0dp"
+                    android:layout_marginTop="@dimen/small_margin"
+                    app:cardCornerRadius="@dimen/normal_corner_radius"
+                    android:layout_below="@id/rotd_heading">
+
+                    <ImageView
+                        android:id="@+id/rotd_image_view"
+                        android:layout_width="100dp"
+                        android:layout_height="88dp"
+                        tools:srcCompat="@drawable/sample_image"
+                        android:scaleType="centerCrop"
+                        android:contentDescription="@{String.format(@string/recipe_image_description_template, recipe.title)}"/>
+                </androidx.cardview.widget.CardView>
+
+                <TextView
+                    android:id="@+id/rotd_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/rotd_heading"
+                    android:layout_toEndOf="@id/rotd_image_card_view"
+                    android:layout_marginStart="@dimen/medium_margin"
+                    android:layout_marginTop="@dimen/small_margin"
+                    style="@style/TextViewStyle.Subtitle.1.Primary"
+                    tools:text="@string/recipe_sample_title"
+                    android:text="@{recipe.title}"/>
+            </RelativeLayout>
+
+
+        </androidx.cardview.widget.CardView>
+    </FrameLayout>
+</layout>

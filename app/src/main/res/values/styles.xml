@@ -13,6 +13,9 @@
         <item name="android:fontFamily">@font/roboto_regular</item>
         <item name="android:textAppearance">@style/TextAppearance.MaterialComponents.Caption</item>
     </style>
+    <style name="TextViewStyle.Headline.3">
+        <item name="android:textAppearance">@style/TextAppearance.MaterialComponents.Headline3</item>
+    </style>
     <style name="TextViewStyle.Headline.5">
         <item name="android:textAppearance">@style/TextAppearance.MaterialComponents.Headline5</item>
     </style>
@@ -21,6 +24,12 @@
     </style>
     <style name="TextViewStyle.Subtitle.2">
         <item name="android:textAppearance">@style/TextAppearance.MaterialComponents.Subtitle2</item>
+    </style>
+    <style name="TextViewStyle.Headline.3.OnBackground">
+        <item name="android:textColor">@color/secondaryColor</item>
+    </style>
+    <style name="TextViewStyle.Headline.5.OnPrimary">
+        <item name="android:textColor">@color/white</item>
     </style>
     <style name="TextViewStyle.Headline.5.OnSurface">
         <item name="android:textColor">@color/black</item>

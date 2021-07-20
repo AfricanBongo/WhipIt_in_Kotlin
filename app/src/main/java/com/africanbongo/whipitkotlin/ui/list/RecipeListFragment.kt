@@ -40,12 +40,7 @@ class RecipeListFragment: Fragment() {
         lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
                 viewModel.recipeResult.collect { result ->
-
-                    if (result is FetchResult.Success) {
-                        binding.recipeRecyclerview.bindWithData(result.data)
-                    }
-
-                    binding.loadingStatusView.bindStatusWithRecyclerView(result, binding.recipeRecyclerview)
+                    binding.loadingView.bindStatusWithRecyclerView(result, binding.recipeRecyclerview)
                 }
             }
         }

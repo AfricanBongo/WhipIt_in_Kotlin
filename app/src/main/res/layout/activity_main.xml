@@ -11,21 +11,31 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:clipChildren="false">
+
+            <androidx.fragment.app.FragmentContainerView
+                android:id="@+id/recipe_of_the_day_view"
+                android:name="com.africanbongo.whipitkotlin.ui.recipeoftheday.RecipeOfTheDayFragment"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:clipChildren="false"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
             <!-- Recipe list of a certain cuisine -->
-            <fragment
-                android:id="@+id/nav_host_fragment"
-                android:name="androidx.navigation.fragment.NavHostFragment"
+            <androidx.fragment.app.FragmentContainerView
+                android:id="@+id/recipe_list_fragment"
+                android:name="com.africanbongo.whipitkotlin.ui.list.RecipeListFragment"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintHeight_min="500dp"
                 android:layout_marginTop="@dimen/small_margin"
-                app:defaultNavHost="true"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:navGraph="@navigation/nav_graph"
+                app:layout_constraintTop_toBottomOf="@id/recipe_of_the_day_view"
                 tools:ignore="FragmentTagUsage" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.core.widget.NestedScrollView>

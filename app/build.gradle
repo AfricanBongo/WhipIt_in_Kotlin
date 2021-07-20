@@ -43,6 +43,7 @@ dependencies {
 
     // Use the spoonacular client library
     implementation project(path: ':SpoonacularClient')
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
 
     def room_version = "2.3.0"
     def core_version = "1.5.0"

@@ -29,5 +29,6 @@
     <dimen name="headline5">24sp</dimen>
     <dimen name="headline6">20sp</dimen>
     <dimen name="subtitle1">16sp</dimen>
+    <dimen name="card_elevation">50dp</dimen>
 
 </resources>

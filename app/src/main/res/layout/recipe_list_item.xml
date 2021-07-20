@@ -19,7 +19,7 @@
             android:layout_width="@dimen/recipe_card_image_width"
             android:layout_height="wrap_content"
             app:cardCornerRadius="@dimen/normal_corner_radius"
-            app:cardElevation="50dp">
+            app:cardElevation="@dimen/card_elevation">
 
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -61,7 +61,7 @@
                     android:maxLines="3"
                     android:text="@{recipe.title}"
                     style="@style/TextViewStyle.Subtitle.1.Primary"
-                    tools:text="Pasta with beef mince minestrone" />
+                    tools:text="@string/recipe_sample_title" />
 
                 <TextView
                     android:id="@+id/recipe_card_source"
@@ -74,7 +74,7 @@
                     android:text="@{String.format(@string/source_template, recipe.sourceName)}"
                     style="@style/TextViewStyle.Subtitle.2.Secondary"
                     android:maxLines="2"
-                    tools:text="By Full Belly Sisters" />
+                    tools:text="@string/recipe_sample_source" />
 
                 <TextView
                     android:id="@+id/prep_time_view"

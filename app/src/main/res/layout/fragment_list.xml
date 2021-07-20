@@ -9,11 +9,10 @@
             type="com.africanbongo.whipitkotlin.ui.list.RecipeListViewModel" />
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:clipChildren="false"
-        android:clipToPadding="false"
         tools:context=".MainActivity">
 
         <!-- Cuisine title -->
@@ -24,8 +23,8 @@
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/small_margin"
             android:text="@string/cuisine_title"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            android:layout_alignParentTop="true"
+            android:layout_alignParentStart="true"/>
 
         <!-- Cuisine selection chip group -->
         <HorizontalScrollView
@@ -34,9 +33,9 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/small_margin"
             android:layout_marginTop="@dimen/small_margin"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/cuisine_title">
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentStart="true"
+            android:layout_below="@id/cuisine_title">
             <com.google.android.material.chip.ChipGroup
                 android:id="@+id/cuisine_chip_group"
                 android:layout_width="wrap_content"
@@ -51,30 +50,30 @@
             android:id="@+id/recipe_recyclerview"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
+            android:layout_below="@+id/cuisine_scroll_view"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
             android:clipChildren="false"
+            android:orientation="vertical"
             app:layoutManager="androidx.recyclerview.widget.StaggeredGridLayoutManager"
             app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior"
-            app:flow_verticalAlign="top"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/cuisine_scroll_view"
             app:spanCount="2"
             tools:listitem="@layout/recipe_list_item" />
 
         <!-- Show the status of the content in the recyclerview -->
 
+
         <FrameLayout
-            android:id="@+id/loading_status_view"
+            android:id="@+id/loading_view"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:background="@color/white"
             android:visibility="gone"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/cuisine_scroll_view">
+            android:layout_alignParentStart="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:layout_below="@id/cuisine_scroll_view">
             <ImageView
                 android:id="@+id/status_image_view"
                 android:layout_width="@dimen/medium_icon_size"
@@ -82,7 +81,5 @@
                 android:layout_gravity="center" />
         </FrameLayout>
 
-
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
+    </RelativeLayout>
 </layout>

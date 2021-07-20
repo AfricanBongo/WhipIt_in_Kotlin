@@ -5,6 +5,7 @@ import android.animation.AnimatorListenerAdapter
 import android.view.View
 import android.widget.FrameLayout
 import android.widget.ImageView
+import android.widget.RelativeLayout
 import androidx.core.net.toUri
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
@@ -38,17 +39,19 @@ fun ImageView.fetchImage(imgUrl: String) {
  * @param status [FetchResult] holding state of the request.
  * @param recyclerView [RecyclerView] to manipulate at different requests
  */
-fun FrameLayout.bindStatusWithRecyclerView(status: FetchResult<Any>, recyclerView: RecyclerView) {
+fun FrameLayout.bindStatusWithRecyclerView(status: FetchResult<List<SummarisedRecipe>>, recyclerView: RecyclerView) {
+    val imageView = findViewById<ImageView>(R.id.status_image_view)
     when (status) {
         is FetchResult.Loading -> {
             crossFadeViews(this, recyclerView, 100)
-            findViewById<ImageView>(R.id.status_image_view).setImageResource(R.drawable.ic_loading_pizza)
+            imageView.setImageResource(R.drawable.ic_loading_pizza)
         }
         is FetchResult.Error -> {
             crossFadeViews(this, recyclerView)
-            findViewById<ImageView>(R.id.status_image_view).setImageResource(R.drawable.ic_error)
+            imageView.setImageResource(R.drawable.ic_error)
         }
         is FetchResult.Success -> {
+            recyclerView.bindWithData(status.data)
             crossFadeViews(recyclerView, this)
         }
     }
@@ -89,7 +92,7 @@ fun crossFadeViews(revealThisView: View, hideThisView: View, durationInMillis: I
  * Creates a new adapter if one hadn't been set already.
  * @param listOfItems List of [Recipe] to be displayed.
  */
-fun RecyclerView.bindWithData(listOfItems: List<SummarisedRecipe>) {
+fun RecyclerView.bindWithData(listOfItems: List<SummarisedRecipe>?) {
     if (adapter == null) adapter = RecipeListAdapter()
     (adapter as RecipeListAdapter).submitList(listOfItems)
 }
