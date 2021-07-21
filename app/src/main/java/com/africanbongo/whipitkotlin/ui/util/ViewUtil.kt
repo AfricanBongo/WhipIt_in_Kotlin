@@ -5,12 +5,10 @@ import android.animation.AnimatorListenerAdapter
 import android.view.View
 import android.widget.FrameLayout
 import android.widget.ImageView
-import android.widget.RelativeLayout
 import androidx.core.net.toUri
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import coil.size.Scale
-import coil.transition.CrossfadeTransition
 import com.africanbongo.whipitkotlin.R
 import com.africanbongo.whipitkotlin.domain.SummarisedRecipe
 import com.africanbongo.whipitkotlin.ui.list.RecipeListAdapter
@@ -19,40 +17,46 @@ import zw.co.bitpirates.spoonacularclient.model.Recipe
 /**
  * Fetches an image using a URL string and loads it into the [ImageView].
  */
-fun ImageView.fetchImage(imgUrl: String) {
+fun ImageView.fetchImage(imgUrl: String?) {
 
-    val imgUri = if (imgUrl.contains("https"))
-        imgUrl.toUri().buildUpon().scheme("https").build()
-    else imgUrl.toUri()
+    if (imgUrl != null) {
+        val imgUri = if (imgUrl.contains("https"))
+            imgUrl.toUri().buildUpon().scheme("https").build()
+        else imgUrl.toUri()
 
-    load(imgUri) {
-        placeholder(R.drawable.ic_placeholder)
-        error(R.drawable.ic_image_not_found)
-        crossfade(1000)
-        scale(Scale.FILL)
+        load(imgUri) {
+            placeholder(R.drawable.ic_placeholder)
+            error(R.drawable.ic_image_not_found)
+            crossfade(1000)
+            scale(Scale.FILL)
+        }
+
+        return
     }
+
+    scaleType = ImageView.ScaleType.CENTER
+    load(R.drawable.ic_image_not_found)
 }
 
 /**
  * Call to update the loading status using the ImageView.
- * Will set [recyclerView] to be blank when [status] is [FetchResult.Loading] or [FetchResult.Error].
+ * The [viewToShow] will be shown when [status] is of type [FetchResult.Success].
  * @param status [FetchResult] holding state of the request.
- * @param recyclerView [RecyclerView] to manipulate at different requests
+ * @param viewToShow To manipulate at different request types.
  */
-fun FrameLayout.bindStatusWithRecyclerView(status: FetchResult<List<SummarisedRecipe>>, recyclerView: RecyclerView) {
+fun <T: Any> FrameLayout.bindStatusWithView(status: FetchResult<T>, viewToShow: View) {
     val imageView = findViewById<ImageView>(R.id.status_image_view)
     when (status) {
         is FetchResult.Loading -> {
-            crossFadeViews(this, recyclerView, 100)
+            crossFadeViews(this, viewToShow, 100)
             imageView.setImageResource(R.drawable.ic_loading_pizza)
         }
         is FetchResult.Error -> {
-            crossFadeViews(this, recyclerView)
+            crossFadeViews(this, viewToShow)
             imageView.setImageResource(R.drawable.ic_error)
         }
         is FetchResult.Success -> {
-            recyclerView.bindWithData(status.data)
-            crossFadeViews(recyclerView, this)
+            crossFadeViews(viewToShow, this)
         }
     }
 }

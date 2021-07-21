@@ -25,6 +25,15 @@ class RecipeRepository(private val recipeDao: RecipeDao) {
     val summarisedRecipeList: StateFlow<List<SummarisedRecipe>> = _summarisedRecipesList
 
     /**
+     * Recipes with high ratings that can be used for the recipe of the day.
+     */
+    val recipesOfTheDay: Flow<List<SummarisedRecipe>> = recipeDao.getRecipesOfScore((80).toDouble()).map { recipes ->
+        return@map recipes.map {
+            it.toSummarisedRecipe()
+        }
+    }
+
+    /**
      * Refresh the cache containing the list of recipes of a certain cuisine.
      */
     suspend fun refreshCacheFor(cuisine: CuisineEnum) = withContext(Dispatchers.IO) {

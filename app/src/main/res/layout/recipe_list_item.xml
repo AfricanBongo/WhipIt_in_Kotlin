@@ -61,7 +61,7 @@
                     android:maxLines="3"
                     android:text="@{recipe.title}"
                     style="@style/TextViewStyle.Subtitle.1.Primary"
-                    tools:text="@string/recipe_sample_title" />
+                    tools:text="@string/sample_recipe_title" />
 
                 <TextView
                     android:id="@+id/recipe_card_source"
@@ -74,7 +74,7 @@
                     android:text="@{String.format(@string/source_template, recipe.sourceName)}"
                     style="@style/TextViewStyle.Subtitle.2.Secondary"
                     android:maxLines="2"
-                    tools:text="@string/recipe_sample_source" />
+                    tools:text="@string/sample_recipe_source" />
 
                 <TextView
                     android:id="@+id/prep_time_view"

@@ -19,7 +19,7 @@ class RecipeListAdapter :
     class RecipeViewHolder(private var binding: RecipeListItemBinding): RecyclerView.ViewHolder(binding.root) {
         fun bind(recipe: SummarisedRecipe) {
             binding.recipe = recipe
-            recipe.imageUrl?.let { binding.recipeCardImage.fetchImage(it) }
+            binding.recipeCardImage.fetchImage(recipe.imageUrl)
             binding.executePendingBindings()
         }
     }

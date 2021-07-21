@@ -4,22 +4,22 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.FrameLayout
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import com.africanbongo.whipitkotlin.R
 import com.africanbongo.whipitkotlin.databinding.FragmentListBinding
 import com.africanbongo.whipitkotlin.storage.database.RecipeDatabase
 import com.africanbongo.whipitkotlin.storage.repository.RecipeRepository
 import com.africanbongo.whipitkotlin.ui.util.FetchResult
-import com.africanbongo.whipitkotlin.ui.util.bindStatusWithRecyclerView
+import com.africanbongo.whipitkotlin.ui.util.bindStatusWithView
 import com.africanbongo.whipitkotlin.ui.util.bindWithData
 import com.google.android.material.chip.Chip
 import com.google.android.material.chip.ChipGroup
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
-import zw.co.bitpirates.spoonacularclient.model.CuisineEnum
-import zw.co.bitpirates.spoonacularclient.model.asStrings
 
 class RecipeListFragment: Fragment() {
     override fun onCreateView(
@@ -40,7 +40,12 @@ class RecipeListFragment: Fragment() {
         lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
                 viewModel.recipeResult.collect { result ->
-                    binding.loadingView.bindStatusWithRecyclerView(result, binding.recipeRecyclerview)
+
+                    if (result is FetchResult.Success) {
+                        binding.recipeRecyclerview.bindWithData(result.data)
+                    }
+
+                    binding.loadingView.bindStatusWithView(result, binding.recipeRecyclerview)
                 }
             }
         }

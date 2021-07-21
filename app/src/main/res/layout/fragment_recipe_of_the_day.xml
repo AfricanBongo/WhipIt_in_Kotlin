@@ -12,12 +12,12 @@
     </data>
     <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="350dp"
+        android:layout_height="@dimen/discover_frame_height"
         tools:context=".ui.recipeoftheday.RecipeOfTheDayFragment">
 
         <com.africanbongo.whipitkotlin.ui.recipeoftheday.CircleBackground
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="match_parent" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -46,10 +46,10 @@
 
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
-            android:layout_height="150dp"
+            android:layout_height="@dimen/rotd_card_view_height"
             android:layout_gravity="bottom"
-            android:layout_marginHorizontal="@dimen/very_large_margin"
-            android:layout_marginBottom="@dimen/large_margin"
+            android:layout_marginHorizontal="@dimen/large_margin"
+            android:layout_marginBottom="@dimen/very_large_margin"
             app:cardCornerRadius="@dimen/normal_corner_radius"
             app:cardElevation="@dimen/card_elevation">
 
@@ -57,12 +57,18 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:paddingVertical="@dimen/small_padding"
-                android:paddingHorizontal="@dimen/medium_padding">
+                android:paddingHorizontal="@dimen/small_padding">
+
                 <TextView
                     android:id="@+id/rotd_heading"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
                     style="@style/TextViewStyle.Headline.5.OnSurface"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/small_margin"
+                    android:layout_marginBottom="@dimen/minute_margin"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentEnd="true"
                     android:text="@string/recipe_of_the_day_title" />
 
                 <androidx.cardview.widget.CardView
@@ -70,14 +76,16 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     app:cardElevation="0dp"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentBottom="true"
                     android:layout_marginTop="@dimen/small_margin"
                     app:cardCornerRadius="@dimen/normal_corner_radius"
                     android:layout_below="@id/rotd_heading">
 
                     <ImageView
                         android:id="@+id/rotd_image_view"
-                        android:layout_width="100dp"
-                        android:layout_height="88dp"
+                        android:layout_width="@dimen/rotd_image_width"
+                        android:layout_height="@dimen/rotd_image_height"
                         tools:srcCompat="@drawable/sample_image"
                         android:scaleType="centerCrop"
                         android:contentDescription="@{String.format(@string/recipe_image_description_template, recipe.title)}"/>
@@ -89,11 +97,63 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@id/rotd_heading"
                     android:layout_toEndOf="@id/rotd_image_card_view"
-                    android:layout_marginStart="@dimen/medium_margin"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginStart="@dimen/small_margin"
                     android:layout_marginTop="@dimen/small_margin"
                     style="@style/TextViewStyle.Subtitle.1.Primary"
-                    tools:text="@string/recipe_sample_title"
+                    tools:text="@string/sample_recipe_title"
                     android:text="@{recipe.title}"/>
+
+                <TextView
+                    android:id="@+id/rotd_source_name"
+                    style="@style/TextViewStyle.Subtitle.2.Secondary"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/rotd_title"
+                    android:layout_toEndOf="@id/rotd_image_card_view"
+                    android:layout_marginTop="@dimen/minute_margin"
+                    android:layout_marginStart="@dimen/small_margin"
+                    android:text="@{String.format(@string/source_template, recipe.sourceName)}"
+                    tools:text="By Full Belly Sisters" />
+
+                <TextView
+                    android:id="@+id/rotd_rating"
+                    style="@style/RatingTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/minute_padding"
+                    android:layout_alignParentBottom="true"
+                    android:layout_toEndOf="@+id/rotd_image_card_view"
+                    android:layout_marginStart="@dimen/minute_margin"
+                    android:layout_marginTop="@dimen/small_margin"
+                    app:drawableEndCompat="@drawable/ic_rating"
+                    tools:text="@string/sample_recipe_rating"
+                    android:text="@{recipe.rating}"/>
+
+                <TextView
+                    android:id="@+id/rotd_prep_time"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    style="@style/IconTextView"
+                    android:layout_alignParentBottom="true"
+                    android:layout_toEndOf="@id/rotd_rating"
+                    android:layout_alignBaseline="@id/rotd_rating"
+                    android:layout_marginStart="@dimen/minute_margin"
+                    tools:text="@string/sample_recipe_prep_time"
+                    android:text="@{recipe.prepTime}"
+                    app:drawableStartCompat="@drawable/ic_prep_time" />
+
+                <TextView
+                    style="@style/IconTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:layout_toEndOf="@+id/rotd_prep_time"
+                    android:layout_marginStart="@dimen/minute_margin"
+                    android:layout_alignBaseline="@id/rotd_rating"
+                    app:drawableStartCompat="@drawable/ic_outline_servings"
+                    android:text="@{String.valueOf(recipe.servings)}"
+                    tools:text="@string/sample_recipe_servings" />
             </RelativeLayout>
 
 

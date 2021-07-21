@@ -18,7 +18,7 @@
                 android:id="@+id/recipe_of_the_day_view"
                 android:name="com.africanbongo.whipitkotlin.ui.recipeoftheday.RecipeOfTheDayFragment"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="@dimen/discover_frame_height"
                 android:clipChildren="false"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"

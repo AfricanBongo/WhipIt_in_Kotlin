@@ -13,6 +13,7 @@
     <dimen name="minute_margin">4dp</dimen>
     <dimen name="small_margin">@dimen/small_padding</dimen>
     <dimen name="medium_margin">@dimen/medium_padding</dimen>
+    <dimen name="rotd_card_view_margin">20dp</dimen>
     <dimen name="large_margin">24dp</dimen>
     <dimen name="very_large_margin">36dp</dimen>
 
@@ -23,6 +24,9 @@
     <!-- Component sizes. -->
     <dimen name="recipe_card_image_height">120dp</dimen>
     <dimen name="recipe_card_image_width">180dp</dimen>
+    <dimen name="rotd_card_view_height">164dp</dimen>
+    <dimen name="rotd_image_width">112dp</dimen> <!-- Recipe of the day image dimensions-->
+    <dimen name="rotd_image_height">104dp</dimen>
 
     <!-- Text sizes. -->
     <dimen name="headline3">48sp</dimen>
@@ -30,5 +34,7 @@
     <dimen name="headline6">20sp</dimen>
     <dimen name="subtitle1">16sp</dimen>
     <dimen name="card_elevation">50dp</dimen>
+    <dimen name="discover_frame_height">376dp</dimen>
+
 
 </resources>

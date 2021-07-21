@@ -1,9 +1,5 @@
 package zw.co.bitpirates.spoonacularclient.service
 
-import android.accounts.NetworkErrorException
-import zw.co.bitpirates.spoonacularclient.model.Recipe
-import zw.co.bitpirates.spoonacularclient.model.RecipeList
-import zw.co.bitpirates.spoonacularclient.service.SpoonacularApi.apiKey
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import kotlinx.coroutines.Dispatchers
@@ -14,9 +10,10 @@ import retrofit2.http.GET
 import retrofit2.http.Query
 import zw.co.bitpirates.spoonacularclient.exception.ServerException
 import zw.co.bitpirates.spoonacularclient.model.CuisineEnum
-import java.lang.Exception
-import java.lang.IllegalArgumentException
-import kotlin.coroutines.coroutineContext
+import zw.co.bitpirates.spoonacularclient.model.Recipe
+import zw.co.bitpirates.spoonacularclient.model.RecipeList
+import zw.co.bitpirates.spoonacularclient.service.SpoonacularApi.apiKey
+import zw.co.bitpirates.spoonacularclient.service.SpoonacularApi.setKey
 
 /**
  * URL for fetching data from the [Spoonacular API](https://spoonacular.com/food-api).
@@ -75,7 +72,7 @@ object SpoonacularApi {
     @Throws(ServerException::class)
     suspend fun getRecipesOfCuisine(
         cuisine: CuisineEnum,
-        numberOfRecipes: QueryNumber = QueryNumber.MEDIUM
+        numberOfRecipes: QueryNumber = QueryNumber.LARGE
     ): List<Recipe> = getRecipesOfCuisine(cuisine, numberOfRecipes.value)
 
 

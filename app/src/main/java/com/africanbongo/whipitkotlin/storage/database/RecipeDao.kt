@@ -1,7 +1,9 @@
 package com.africanbongo.whipitkotlin.storage.database
 
-import androidx.room.*
-import zw.co.bitpirates.spoonacularclient.model.Ingredient
+import androidx.room.Dao
+import androidx.room.Insert
+import androidx.room.OnConflictStrategy
+import androidx.room.Query
 import com.africanbongo.whipitkotlin.storage.database.model.*
 import kotlinx.coroutines.flow.Flow
 
@@ -66,6 +68,14 @@ interface RecipeDao {
      */
     @Query("SELECT * FROM recipe_table ORDER BY RANDOM() LIMIT 20")
     suspend fun getAllRecipes(): List<DatabaseRecipe>
+
+    /**
+     * Retrieve recipe having [DatabaseRecipe.spoonacularScore] greater than or equal to [score].
+     * @param score The score that the recipes returned should be or above of.
+     * @return A list of recipes.
+     */
+    @Query("SELECT * FROM recipe_table WHERE spoonacularScore >= :score ORDER BY spoonacularScore DESC LIMIT 10")
+    fun getRecipesOfScore(score: Double): Flow<List<DatabaseRecipe>>
 
     /**
      * Fetch the associated recipes of a cuisine.

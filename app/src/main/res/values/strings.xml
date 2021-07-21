@@ -20,6 +20,11 @@
     <string name="cuisine_title">Cuisine</string>
     <string name="discover_title">Discover</string>
     <string name="recipe_of_the_day_title">Recipe of the day</string>
-    <string name="recipe_sample_title">Pasta with beef mince minestrone</string>
-    <string name="recipe_sample_source">By Full Belly Sisters</string>
+
+    <!-- Sample texts -->
+    <string name="sample_recipe_title">Pasta with beef mince minestrone</string>
+    <string name="sample_recipe_source">By Full Belly Sisters</string>
+    <string name="sample_recipe_prep_time">30min</string>
+    <string name="sample_recipe_servings">2</string>
+    <string name="sample_recipe_rating">4.5</string>
 </resources>
