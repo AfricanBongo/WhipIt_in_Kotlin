@@ -27,7 +27,9 @@ class ROTDViewModel(private val repository: RecipeRepository): ViewModel() {
         viewModelScope.launch {
             withContext(Dispatchers.IO) {
                 repository.recipesOfTheDay.collect {
-                    _recipeOfTheDay.value = FetchResult.success(it.first())
+                    if (it.isNotEmpty() && _recipeOfTheDay.value !is FetchResult.Success) {
+                        _recipeOfTheDay.value = FetchResult.success(it.first())
+                    }
                 }
             }
         }
