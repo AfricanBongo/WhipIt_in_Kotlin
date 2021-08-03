@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.FrameLayout
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
@@ -41,8 +42,13 @@ class RecipeListFragment: Fragment() {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
                 viewModel.recipeResult.collect { result ->
 
-                    if (result is FetchResult.Success) {
-                        binding.recipeRecyclerview.bindWithData(result.data)
+                    when (result) {
+                        is FetchResult.Success -> binding.recipeRecyclerview.bindWithData(result.data)
+                        is FetchResult.Error -> {
+                            Toast.makeText(requireContext(), result.message, Toast.LENGTH_SHORT)
+                                .show()
+                        }
+                        is FetchResult.Loading -> {}
                     }
 
                     binding.loadingView.bindStatusWithView(result, binding.recipeRecyclerview)

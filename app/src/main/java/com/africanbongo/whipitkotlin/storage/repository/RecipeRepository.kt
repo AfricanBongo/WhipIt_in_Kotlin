@@ -36,7 +36,7 @@ class RecipeRepository(private val recipeDao: RecipeDao) {
     /**
      * Refresh the cache containing the list of recipes of a certain cuisine.
      */
-    suspend fun refreshCacheFor(cuisine: CuisineEnum) = withContext(Dispatchers.IO) {
+    suspend fun refreshCacheFor(cuisine: CuisineEnum, refreshStateFlow: Boolean) = withContext(Dispatchers.IO) {
         // Fetch the list of recipes from the network server asynchronously.
         // Parse it into DecomposedBundles and then store them in the database as an async task.
 
@@ -64,6 +64,23 @@ class RecipeRepository(private val recipeDao: RecipeDao) {
             rcCrossRefs?.let { recipeDao.insertRecipeCuisineCrossRef(it) }
         }
 
+
+        // Set a new value for the stateflow.
+        if (refreshStateFlow) refreshFlow(cuisine)
+    }
+
+    // Checks if there are any recipes at all.
+    // If there then don't refresh recipe cache.
+    private suspend fun shouldRefreshCache(cuisine: CuisineEnum): Boolean {
+        val recipesAvailable: Int =
+            if (cuisine == CuisineEnum.NONE)
+                recipeDao.getAllRecipes().size
+            else recipeDao.getRecipesOfCuisine(cuisine.id).size
+
+        return recipesAvailable == 0
+    }
+
+    private suspend fun refreshFlow(cuisine: CuisineEnum) {
         _summarisedRecipesList.value =
             if (cuisine == CuisineEnum.NONE)
                 recipeDao.getAllRecipes().map {

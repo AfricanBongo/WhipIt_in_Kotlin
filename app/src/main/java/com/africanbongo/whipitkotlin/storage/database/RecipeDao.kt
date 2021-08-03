@@ -86,6 +86,20 @@ interface RecipeDao {
     suspend fun getRecipesOfCuisine(cuisineId: Int): List<DatabaseRecipe>
 
     /**
+     * Check if recipes of this cuisine exist.
+     * @return 1, if they exist, else 0 if none exist
+     */
+    @Query("SELECT COUNT(*) FROM recipe_table LEFT JOIN rc_table ON recipe_table.recipeId=rc_table.recipeId WHERE cuisineId = :cuisineId LIMIT 1")
+    suspend fun recipesExistOfCuisine(cuisineId: Int): Int
+
+    /**
+     * Check if there are any recipes at all.
+     * @return 1, if they exist, else 0 if none exist
+     */
+    @Query("SELECT COUNT(*) FROM recipe_table LIMIT 1")
+    suspend fun recipesExist(): Int
+
+    /**
      * Fetch the associated ingredients of a recipe.
      * @param recipeId The id used to locate the recipe to return.
      * @return A list of ingredients.

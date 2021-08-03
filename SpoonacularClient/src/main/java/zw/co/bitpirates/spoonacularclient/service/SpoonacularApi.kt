@@ -12,7 +12,7 @@ import zw.co.bitpirates.spoonacularclient.exception.ServerException
 import zw.co.bitpirates.spoonacularclient.model.CuisineEnum
 import zw.co.bitpirates.spoonacularclient.model.Recipe
 import zw.co.bitpirates.spoonacularclient.model.RecipeList
-import zw.co.bitpirates.spoonacularclient.service.SpoonacularApi.apiKey
+import zw.co.bitpirates.spoonacularclient.service.SpoonacularApi.getRecipesOfCuisine
 import zw.co.bitpirates.spoonacularclient.service.SpoonacularApi.setKey
 
 /**
@@ -89,11 +89,11 @@ object SpoonacularApi {
             // If the cuisine enum identifies as CuisineEnum.NONE, pass parameter to base method as null.
             val cuisineString: String? = if (cuisine == CuisineEnum.NONE) null else cuisine.type
 
-            try {
-                return getRecipesOfCuisine(cuisineString, numberOfRecipes)?.listOfRecipes ?: emptyList()
-            } catch (e: Exception) {
-                throw ServerException(message = "Couldn't fetch the list of recipes successfully", cause = e)
-            }
+            return getRecipesOfCuisine(cuisineString, numberOfRecipes)?.listOfRecipes
+                ?: throw ServerException(
+                    message = "Couldn't fetch the list of recipes successfully",
+                    Exception()
+                )
         }
 
         throw IllegalArgumentException("numberOfRecipes argument should be in the range 1 to 100.")

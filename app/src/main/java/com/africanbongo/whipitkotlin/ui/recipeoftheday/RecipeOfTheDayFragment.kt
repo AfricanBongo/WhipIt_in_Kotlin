@@ -1,18 +1,15 @@
 package com.africanbongo.whipitkotlin.ui.recipeoftheday
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.FrameLayout
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.*
-import com.africanbongo.whipitkotlin.R
 import com.africanbongo.whipitkotlin.databinding.FragmentRecipeOfTheDayBinding
 import com.africanbongo.whipitkotlin.storage.database.RecipeDatabase
 import com.africanbongo.whipitkotlin.storage.repository.RecipeRepository
 import com.africanbongo.whipitkotlin.ui.util.FetchResult
-import com.africanbongo.whipitkotlin.ui.util.bindStatusWithView
 import com.africanbongo.whipitkotlin.ui.util.fetchImage
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch

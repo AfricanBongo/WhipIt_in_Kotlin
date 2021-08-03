@@ -12,6 +12,7 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import zw.co.bitpirates.spoonacularclient.exception.ServerException
 import zw.co.bitpirates.spoonacularclient.model.CuisineEnum
 import zw.co.bitpirates.spoonacularclient.model.asStrings
 import zw.co.bitpirates.spoonacularclient.service.QueryNumber
@@ -51,7 +52,11 @@ class RecipeListViewModel(private val repository: RecipeRepository) : ViewModel(
     fun changeCuisine(listPosition: Int) {
         _recipeResult.value = FetchResult.Loading
         viewModelScope.launch {
-            repository.refreshCacheFor(_cuisineTypes[listPosition])
+            try {
+                repository.refreshCacheFor(_cuisineTypes[listPosition], true)
+            } catch (e: ServerException) {
+                _recipeResult.value = FetchResult.error(e.message!!)
+            }
         }
     }
 }

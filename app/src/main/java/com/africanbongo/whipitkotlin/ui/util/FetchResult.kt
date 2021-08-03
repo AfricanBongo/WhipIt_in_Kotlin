@@ -1,5 +1,7 @@
 package com.africanbongo.whipitkotlin.ui.util
 
+import com.africanbongo.whipitkotlin.domain.SummarisedRecipe
+
 /**
  * Can be used in collecting the request from a data source.
  */

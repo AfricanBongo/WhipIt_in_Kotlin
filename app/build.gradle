@@ -43,11 +43,11 @@ dependencies {
 
     // Use the spoonacular client library
     implementation project(path: ':SpoonacularClient')
-    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
 
+    def work_version = "2.5.0"
     def room_version = "2.3.0"
     def core_version = "1.5.0"
-    def appcompat_version = "1.3.0"
+    def appcompat_version = "1.3.1"
     def lifecycle_version = "2.4.0-alpha02"
     def coil_version = "1.2.2"
     def retrofit_version = "2.9.0"
@@ -55,6 +55,9 @@ dependencies {
     
     // Coil image-loading library
     implementation "io.coil-kt:coil:$coil_version"
+
+    // WorkManager API
+    implementation "androidx.work:work-runtime-ktx:$work_version"
 
     // Navigation library
     implementation "androidx.navigation:navigation-fragment-ktx:$navigation_version"
@@ -91,7 +94,7 @@ dependencies {
     implementation "androidx.core:core-ktx:$core_version"
     implementation "androidx.appcompat:appcompat:$appcompat_version"
     implementation 'com.google.android.material:material:1.4.0'
-    implementation 'androidx.constraintlayout:constraintlayout:2.0.4'
+    implementation 'androidx.constraintlayout:constraintlayout:2.1.0'
     androidTestImplementation 'androidx.test.ext:junit:1.1.3'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
 }
