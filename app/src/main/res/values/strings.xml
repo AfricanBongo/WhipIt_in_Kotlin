@@ -6,6 +6,7 @@
     <string name="source_template">By %s</string>
     <string name="recipe_image_description_template">Image of %s</string>
     <string name="prep_time_template">%s min</string>
+    <string name="notification_text_template">Today\'s handpicked recipe for you is: \n%s</string>
 
     <!-- Image content descriptions, may also be used for tooltips. -->
     <string name="servings_description">Servings</string>
@@ -21,7 +22,12 @@
     <string name="discover_title">Discover</string>
     <string name="recipe_of_the_day_title">Recipe of the day</string>
 
-    <!-- Sample texts -->
+    <!-- Notification. -->
+    <string name="notification_channel_id">ROTD channel id</string>
+    <string name="notification_channel_name">Recipe of the Day channel.</string>
+    <string name="notification_title">@string/recipe_of_the_day_title</string>
+
+    <!-- Sample texts. -->
     <string name="sample_recipe_title">Pasta with beef mince minestrone</string>
     <string name="sample_recipe_source">By Full Belly Sisters</string>
     <string name="sample_recipe_prep_time">30min</string>
