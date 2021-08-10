@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "723871540244",
+    "project_id": "whipit-79b4f",
+    "storage_bucket": "whipit-79b4f.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:723871540244:android:0608ca2453aec293393301",
+        "android_client_info": {
+          "package_name": "com.africanbongo.whipitkotlin"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "723871540244-jigo79gn5hhci20uli4t40ui6sg33lr6.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDLpWugcX9G1bXrVCk2EJtX0oi_q8wasDI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "723871540244-jigo79gn5hhci20uli4t40ui6sg33lr6.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -14,7 +14,7 @@ class WhipItApplication: Application() {
         Timber.plant(Timber.DebugTree())
 
         // Set the api key of the spoonacular client.
-        SpoonacularApi.setKey("*******************************")
+        SpoonacularApi.setKey("ddfab49f8dd0483ba21ccf2944815631")
 
         // Prefetch recipes from API.
         val preloadRecipes: WorkRequest = OneTimeWorkRequestBuilder<RecipeWorker>().build()

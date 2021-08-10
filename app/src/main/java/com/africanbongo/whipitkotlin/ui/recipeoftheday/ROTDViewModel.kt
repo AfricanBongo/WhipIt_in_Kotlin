@@ -39,7 +39,7 @@ class ROTDViewModel(private val repository: RecipeRepository): ViewModel() {
 class ROTDViewModelFactory(private val repository: RecipeRepository): ViewModelProvider.Factory {
 
     @Suppress("unchecked_cast")
-    override fun <T : ViewModel?> create(modelClass: Class<T>): T {
+    override fun <T : ViewModel> create(modelClass: Class<T>): T {
         if (modelClass.isAssignableFrom(ROTDViewModel::class.java))
             return ROTDViewModel(repository) as T
 

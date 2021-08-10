@@ -5,8 +5,16 @@ import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.content.Context
 import android.os.Build
+import androidx.core.app.NotificationCompat
+import androidx.core.graphics.drawable.toBitmap
+import coil.ImageLoader
+import coil.request.ImageRequest
+import coil.util.CoilUtils
 import com.africanbongo.whipitkotlin.R
 import com.africanbongo.whipitkotlin.domain.SummarisedRecipe
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.coroutineScope
+import kotlinx.coroutines.withContext
 
 object Notifications {
 
@@ -36,29 +44,37 @@ object Notifications {
     }
 
 
-    @android.support.annotation.RequiresApi(Build.VERSION_CODES.JELLY_BEAN)
-    fun NotificationManager.dispatchNotification(applicationContext: Context, recipe: SummarisedRecipe) {
+    suspend fun NotificationManager.dispatchNotification(applicationContext: Context, recipe: SummarisedRecipe) {
 
         val builder = NotificationCompat.Builder(
             applicationContext,
             applicationContext.getString(R.string.notification_channel_id)
         ).apply {
             setSmallIcon(R.drawable.ic_pizza)
-            setContextTitle(applicationContext.getString(R.string.notification_title))
+            setContentTitle(applicationContext.getString(R.string.notification_title))
             // Merge the string template with the recipe data.
             val resultString = String.format(
                 applicationContext.getString(R.string.notification_text_template),
                 recipe.title
             )
 
+            setContentText(resultString)
+
             // Only use the big picture style if the recipe has an image associated with it.
             recipe.imageUrl?.let {
-                val bigPictureStyle = Notification.BigPictureStyle()
-                val imageRequest = ImageLoader.Builder(applicationContext)
-                    .data(it)
-                    .build()
+                val bigPictureStyle = NotificationCompat.BigPictureStyle()
+                val imageRequest = ImageRequest.Builder(applicationContext).data(it).build()
 
-                bigPictureStyle.bigPicture(ImageLoader.execute(imageRequest))
+                withContext(Dispatchers.Default) {
+                    val bitmapImage = ImageLoader
+                        .invoke(applicationContext)
+                        .execute(imageRequest)
+                        .drawable
+                        ?.toBitmap()
+
+                    bigPictureStyle.bigPicture(bitmapImage)
+                }
+
                 setStyle(bigPictureStyle)
             }
 
